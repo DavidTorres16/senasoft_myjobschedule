@@ -5,7 +5,7 @@ import IndexPage from './modules/IndexPage/IndexPage';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <header className="">
         <IndexPage/>
       </header>
     </div>

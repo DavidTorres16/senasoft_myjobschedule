@@ -1,6 +1,7 @@
 import React from 'react'
 import { ShowMoreButton } from '../ActionButton/ActionButton'
-export default function scheduleDailyCard(props) {
+
+export default function ScheduleDailyCard(props) {
     return (
         <div>
             <h1>Día del turno {props.WorkShiftDay}</h1>

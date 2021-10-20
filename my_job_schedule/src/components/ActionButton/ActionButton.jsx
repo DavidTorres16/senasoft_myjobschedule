@@ -16,7 +16,7 @@ export function NormalActionButton(ActionName){
     )
 }
 
-export function ExportPdfButton(){
+export function DownloadPdfButton(){
     return(
         <div>
             <h1>Descargar PDF</h1>
@@ -24,7 +24,7 @@ export function ExportPdfButton(){
     )
 }
 
-export function ExportPdfButton(){
+export function DownloadExcelButton(){
     return(
         <div>
             <h1>Descargar Excel</h1>
