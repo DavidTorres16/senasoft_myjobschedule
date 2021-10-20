@@ -83,8 +83,7 @@ def registerWorkshift():
     cur.close()
     if alreadyExist == None:
         cur = mysql.connection.cursor()
-        cur.execute(f"INSERT INTO `sena`.`workshift` (`shiftid`, `staffid`, `position`, `staffname`, `stafflastname`, `shiftDay`, `starttime`, `finishtime`, `news`) VALUES ('{}', '2', '2', '2', '4', '5', '05:00:00', '05:00:00', 'yes')",
-        (name,lastname,phonenumber,email,password))
+    
         mysql.connection.commit()
         cur.close()
         return jsonify(exist = False)
