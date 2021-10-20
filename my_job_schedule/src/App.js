@@ -1,11 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
 import IndexPage from './modules/IndexPage/IndexPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="App w-100">
+      <header className="containerApp">
         <IndexPage/>
       </header>
     </div>

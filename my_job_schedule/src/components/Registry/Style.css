@@ -1,0 +1,22 @@
+
+.containerApp{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.inputs {
+    border-radius: 0px 25px 25px 0px;
+    border-style: none;
+}
+
+.bgform{
+    background-color: #273c75b6;
+    border-radius: 1em;
+}
+
+
+
+
