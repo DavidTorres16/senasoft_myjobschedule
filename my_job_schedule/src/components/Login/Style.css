@@ -1,0 +1,34 @@
+*{
+    font-family: 'Poppins';
+}
+
+.containerApp{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.inputs {
+    color: #273c75;
+    border-radius: 0px 25px 25px 0px;
+    border-style: none;
+}
+
+.inputs:focus {
+    color: #3956a5;
+}
+
+.bgform{
+    background-color: #273c75b6;
+    border-radius: 1em;
+}
+
+.linkPassword{
+    text-decoration: none;
+}
+
+.linkPassword:hover{
+    text-decoration:underline;
+}
