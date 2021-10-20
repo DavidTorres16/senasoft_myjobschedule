@@ -73,7 +73,7 @@ export default function StaffSchedule(props) {
     }, [])
 
     return (
-        <div className="row">
+        <div className="row d-flex flex-column ">
             {/* <div className="row">
                 {weekDays.map(day =>(
                     <div className="col">{day}</div>
@@ -89,16 +89,20 @@ export default function StaffSchedule(props) {
                 </div>
             </div> */}
 
-            <table>
-                <thead>
-                    {weekDays.map(day => (
-                        <th>
-                            {day}
-                        </th>
+            <div className="d-flex flex-column" >
+                <div className className="d-flex">
+                {weekDays.map(day => (
+                    <div className="col">
+                        {day}
+                    </div>
+                ))}
+                </div>
+                <div flex-column>
+                    {totalDaysArray.map(day =>(
+                        <ScheduleDailyCard/>
                     ))}
-                </thead>
-                
-            </table>
+                </div>
+            </div>
         </div>
     )
 }
