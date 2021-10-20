@@ -2,7 +2,7 @@ import './Style.css';
 import React, {useEffect,useState} from 'react'
 const API= process.env.REACT_APP_API;
 
-export default function Login() {
+export default function Registry() {
 
     const [password, setPassword] = useState("")
     const [id,setId] = useState("")

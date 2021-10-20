@@ -53,7 +53,7 @@ def login():
     data2=request.json
     token=write_token(data2)
     print(request.json)
-    email = request.json["email"]
+    email = request.json["id"]
     password= request.json["password"]
     cur = mysql.connection.cursor()
     cur.execute(f"SELECT * FROM Staff WHERE email = '{email}' and password = '{password}'")
@@ -83,7 +83,7 @@ def registerWorkshift():
     cur.close()
     if alreadyExist == None:
         cur = mysql.connection.cursor()
-        cur.execute(f"INSERT INTO `sena`.`workshift` (`shiftid`, `staffid`, `position`, `staffname`, `stafflastname`, `shiftDay`, `starttime`, `finishtime`, `news`) VALUES ('{}', '2', '2', '2', '4', '5', '05:00:00', '05:00:00', 'yes')",
+        cur.execute(f"INSERT INTO `sena`.`workshift` (`shiftid`, `staffid`, `position`, `staffname`, `stafflastname`, `shiftDay`, `starttime`, `finishtime`, `news`) VALUES ('', '2', '2', '2', '4', '5', '05:00:00', '05:00:00', 'yes')",
         (name,lastname,phonenumber,email,password))
         mysql.connection.commit()
         cur.close()
