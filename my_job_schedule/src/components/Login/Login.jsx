@@ -8,10 +8,18 @@ export default function Login() {
 
     const verifyCompletedInputs = () =>{
         if(id.length < 1 || password.length < 1){
-            alert("Please complete the form")
+            alert("Por favor rellene todos los campos")
             return false
         }
-        return true
+        else if(id.length <= 9){
+            alert("Error, verifique su documento de identidad")
+        }
+        else if(password.length <= 8){
+            alert("Error, verifique su contraseña")
+        }
+        else{
+            return true
+        }
     }
 
     const handleSubmit = async(e) =>{
