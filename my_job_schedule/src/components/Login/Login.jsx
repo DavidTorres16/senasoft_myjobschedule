@@ -1,3 +1,5 @@
+import'./Style.css'
+import Icono from '../../img/Icono.png'
 import React, {useEffect,useState} from 'react'
 const API = process.env.REACT_APP_API;
 
@@ -41,11 +43,36 @@ export default function Login() {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="Documento de identidad"  onChange={e => setId(e.target.value)} value={id}/>
-                <input type="password" placeholder="Contraseña" onChange={e => setPassword(e.target.value)} value={password}/>
-                <input type="submit" value="IniciarSesion"/>
+        <div className="d-flex flex-column containerApp justify-content-center align-items-center">
+            <form onSubmit={handleSubmit} className="d-flex flex-column w-75 pt-3 pb-4 justify-content-center align-items-center bgform">
+                <div>
+                    <img src={Icono} alt="LOGO" />
+                </div>
+                
+                <div class="mb-3 d-flex flex-column w-75">
+                <label htmlFor="doc" className="form-label text-light">Número de documento</label>
+                    <input type="text" 
+                    placeholder="Documento de identidad" 
+                    className="form-control inputs" 
+                    id="doc"
+                    onChange={e => setId(e.target.value)} value={id}/>
+                </div>
+
+                <div class="mb-3 d-flex flex-column w-75">
+                <label htmlFor="password" className="form-label text-light">Password</label>
+                <input type="password" 
+                    placeholder="Contraseña" 
+                    className="form-control inputs"  
+                    id="password" 
+                    onChange={e => setPassword(e.target.value)} value={password}/>
+                </div>
+
+                <div className="d-grid w-75">
+                    <input type="submit" 
+                    className="btn btn-success p-3 fs-5 w-100" 
+                    value="IniciarSesion"/>
+                </div>
+                <a href="#" className="fs-5 text-light pt-2 pb-2 linkPassword">Olvidaste la contraseña?</a>
             </form>
         </div>
     )

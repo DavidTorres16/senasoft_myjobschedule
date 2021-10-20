@@ -1,7 +1,8 @@
+import './Style.css';
 import React, {useEffect,useState} from 'react'
 const API= process.env.REACT_APP_API;
 
-export default function Login() {
+export default function Registry() {
 
     const [password, setPassword] = useState("")
     const [id,setId] = useState("")
@@ -45,15 +46,59 @@ export default function Login() {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="Documento de identidad"  onChange={e => setId(e.target.value)} value={id}/>
-                <input type="text" placeholder="Nombre"  onChange={e => setName(e.target.value)} value={name}/>
-                <input type="text" placeholder="Apellido" onChange={e => setLastName(e.target.value)} value={lastName}/>
-                <input type="text" placeholder="Teléfono" onChange={e => setPhoneNumber(e.target.value)} value={phoneNumber}/>
-                <input type="text" placeholder="Email" onChange={e => setEmail(e.target.value)} value={email}/>
-                <input type="password" placeholder="contraseña" onChange={e => setPassword(e.target.value)} value={password}/>
-                <input type="submit" value="IniciarSesion"/>
+        <div className="d-flex flex-column containerApp justify-content-center align-items-center">
+            <form onSubmit={handleSubmit} className="d-flex flex-column w-100 pt-3 pb-4 justify-content-center align-items-center bgform">
+                <div className="mb-3 d-flex flex-column w-75">
+                    <label htmlFor="rdoc" className="form-label text-light">Número de documento</label>
+                    <input type="text" 
+                    placeholder="Documento de identidad" 
+                    className="form-control inputs" id="rdoc" 
+                    onChange={e => setId(e.target.value)} value={id}/>
+                </div>
+
+                <div className="mb-3 d-flex flex-column w-75">
+                    <label htmlFor="rnombre" className="form-label text-light">Nombres</label>
+                    <input type="text" 
+                    placeholder="Nombre" 
+                    className="form-control inputs" id="rnombre" 
+                    onChange={e => setName(e.target.value)} value={name}/>
+                </div>
+
+                <div className="mb-3 d-flex flex-column w-75">
+                    <label htmlFor="rapellido" className="form-label text-light">Apellidos</label>
+                    <input type="text" 
+                    placeholder="Apellido" 
+                    className="form-control inputs" id="rapellido" 
+                    onChange={e => setLastName(e.target.value)} value={lastName}/>
+                </div>
+
+                <div className="mb-3 d-flex flex-column w-75">
+                    <label htmlFor="rtelefono" className="form-label text-light">Teléfono</label>
+                    <input type="text" 
+                    placeholder="Teléfono" 
+                    className="form-control inputs" id="rtelefono" 
+                    onChange={e => setPhoneNumber(e.target.value)} value={phoneNumber}/>
+                </div>
+
+                <div className="mb-3 d-flex flex-column w-75">
+                    <label htmlFor="remail" className="form-label text-light">Email</label>
+                    <input type="text" 
+                    placeholder="Email" 
+                    className="form-control inputs" id="remail" 
+                    onChange={e => setEmail(e.target.value)} value={email}/>
+                </div>
+
+                <div className="mb-3 d-flex flex-column w-75">
+                    <label htmlFor="rpassword" className="form-label text-light">Contraseña</label>
+                    <input type="password" 
+                    placeholder="contraseña" 
+                    className="form-control inputs" id="rpassword" 
+                    onChange={e => setPassword(e.target.value)} value={password}/>
+                </div>
+
+                <div className="d-grid w-75">
+                    <input type="submit" className="btn btn-success p-3 w-100" value="IniciarSesion"/>
+                </div>
             </form>
         </div>
     )
