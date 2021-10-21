@@ -15,12 +15,16 @@ export function PatientAsignationCardVent(props) {
     else if(styles == 2){
         classname += " bgFormChildren"
     }
+    else if(styles == 3){
+        classname += " bgFormMed"
+    }
+    else if(styles == 4){
+        classname += " bgFormGen"
+    }
     
     const handleBtn = (arithmetic,type,e) =>{
         e.preventDefault();
-        let number1 = 0
-        let number2 = 0
-        
+
         if(arithmetic === 1 && type == 1){
             setServiceHours(serviceHours+1)
         }
