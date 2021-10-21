@@ -8,7 +8,7 @@ export default function ScheduleDailyCard(props) {
                 <h5>Día del turno {props.WorkShiftDay}</h5>
                 <p>Hora de inicio: {props.startTime}</p>
                 <p>Hora de inicio: {props.finishTime}</p>
-                <ShowMoreButton/>
+                {/* <ShowMoreButton/> */}
         </div>
     )
 }

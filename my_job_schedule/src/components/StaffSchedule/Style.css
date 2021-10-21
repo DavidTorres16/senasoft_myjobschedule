@@ -1,16 +1,25 @@
 
 
 .shulde{
-    background-color: rgba(16, 124, 151, 0.644);
+    background-color: #273c75b6;
     border-radius: 7px;
+    padding: 1.5rem;
     width: 100%;
 }
 
 .days{
-    background-color: rgba(60, 121, 179, 0.644);
+    /* background-color: rgb(60, 121, 179); */
     border-radius: 0px;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding-top: 1rem;
 }
 
+.bg-calenadar{
+    background-color: #273c75b6;
+    border-radius: 7px;
+}
 
