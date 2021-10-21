@@ -81,13 +81,14 @@ export default function Login() {
                 </div>
 
                 <div className="mb-3 d-flex flex-column w-75">
-                    <label htmlFor="remail" className="form-label text-light">Email</label>
-                    <input type="text" 
-                    placeholder="Email" 
-                    className="form-control inputs" id="remail" 
-                    onChange={e => setEmail(e.target.value)} value={email}/>
+                    <label htmlFor="especility" className="form-label text-light">Especialidad (seleccione una)</label>
+                    <select name="select" className="selectSpecility " id="especility">
+                        <option value={1}>Ventilación</option>
+                        <option value={2}>Infantes</option>
+                        <option value={3}>Administración de medicamentos</option>
+                        <option value={4}>General</option>
+                    </select>
                 </div>
-
                 <div className="mb-3 d-flex flex-column w-75">
                     <label htmlFor="rpassword" className="form-label text-light">Contraseña</label>
                     <input type="password" 
