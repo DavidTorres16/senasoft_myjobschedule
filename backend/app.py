@@ -57,7 +57,7 @@ def login():
     if data != None:
         token=write_token(data)
         token=str(token).split("'")[1]
-        return jsonify({"Token":token})
+        return jsonify({"token":token})
         print()
     else:
         return jsonify(exist = False)
