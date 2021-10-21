@@ -45,11 +45,7 @@ def staffRegistry():
     else:
         return jsonify(exist = True)
 
-def token():
-    data=request.json
-    token=write_token(data)
-    print(data)
-    print(f"token {token}")
+
 
     return token
 
