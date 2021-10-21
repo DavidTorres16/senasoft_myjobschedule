@@ -57,7 +57,8 @@ def login():
     cur.execute(f"SELECT * FROM staff WHERE id = '{id}' and password = '{password}'")
     data= cur.fetchone()
     if data != None:
-        return write_token(request.get_json())
+        token=str(write_token(request.get_json())).split("'")[1]
+        return jsonify({"token":token})
     else:
         return jsonify(exist = False)
 
