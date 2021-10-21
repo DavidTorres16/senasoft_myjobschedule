@@ -26,18 +26,17 @@ def staffRegistry():
     lastname=data["lastname"]
     phonenumber=data["phonenumber"]
     specialities=data["specialities"]
-    specialities=data["specialities"]
     staffrestricttions=data["staffrestrictions"]
     passwords=data["passwords"]
 
     cur = mysql.connection.cursor()
-    cur.execute(f"SELECT * FROM Staff WHERE id='{id}'")
+    cur.execute(f"SELECT * FROM staff WHERE id='{id}'")
     alreadyExist= cur.fetchone()
     mysql.connection.commit()
     cur.close()
     if alreadyExist == None:
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO staff (id,name,lastname,phonenumber,specialities,staffrestrictions) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)",
+        cur.execute("INSERT INTO staff (id,name,lastname,phonenumber,specialities,staffrestrictions,passwords) VALUES(%s,%s,%s,%s,%s,%s,%s)",
         (id,name,lastname,phonenumber,specialities,staffrestricttions,passwords))
         mysql.connection.commit()
         cur.close() 
@@ -52,13 +51,10 @@ def login():
     id=data["id"]
     password=data["password"]
     cur = mysql.connection.cursor()
-    cur.execute(f"SELECT * FROM Staff WHERE id = '{id}' and password = '{password}'")
+    cur.execute(f"SELECT * FROM staff WHERE id = '{id}' and password = '{password}'")
     data= cur.fetchone()
     if data != None:
-        token=write_token(data)
-        token=str(token).split("'")[1]
-        return jsonify({"token":token})
-        print()
+        return write_token(request.get_json())
     else:
         return jsonify(exist = False)
 
@@ -89,6 +85,11 @@ def registerWorkshift():
     else:
         return jsonify(exist = True)
     
+
+@app.route('/cronograma')
+def cronograma():
+    cur=mysql.connection.cursor()
+
 
 if __name__ == '__main__':
     load_dotenv()
