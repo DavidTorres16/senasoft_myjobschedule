@@ -56,7 +56,7 @@ export function PatientAsignationCardVent(props) {
     }
     
     return (
-        <div class="col-md-6 m-1">
+        <div class="col-md-6 m-1 w-75">
             <form className={classname}>
                 <h2 className="formTitle">Pacientes ventilados</h2>
                 <div className="mb-3 d-flex flex-column w-75">

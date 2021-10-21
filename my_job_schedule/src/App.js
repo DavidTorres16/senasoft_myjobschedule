@@ -8,7 +8,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 function App() {
   return (
-    <div className="App w-100">
+    <div className="container App">
       <Router>
         <div className="d-flex justify-content-center align-items-center w-100 h-100">
             <Switch>
