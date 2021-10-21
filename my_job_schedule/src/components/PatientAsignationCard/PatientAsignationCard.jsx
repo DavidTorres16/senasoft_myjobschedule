@@ -6,20 +6,25 @@ export function PatientAsignationCardVent(props) {
     
     const [serviceHours, setServiceHours] = useState(0)
     const [patientsNumber, setPatientsNumber] = useState(0)
+    const [patientType, setPatientType] = useState("")
     const styles =props.styles;
     let classname = "d-flex flex-column w-100 pt-3 pb-4 justify-content-center align-items-center";
     
     if(styles == 1){
         classname += " bgFormVen"
+        setPatientType(1)
     }
     else if(styles == 2){
         classname += " bgFormChildren"
+        setPatientType(2)
     }
     else if(styles == 3){
         classname += " bgFormMed"
+        setPatientType(3)
     }
     else if(styles == 4){
         classname += " bgFormGen"
+        setPatientType(4)
     }
     
     const handleBtn = (arithmetic,type,e) =>{
@@ -47,7 +52,8 @@ export function PatientAsignationCardVent(props) {
             },
             body: JSON.stringify({
                 serviceHours,
-                patientsNumber
+                patientsNumber,
+                patientType
             })
         })
         const data = await res.json();
