@@ -1,12 +1,14 @@
 import'./Style.css'
 import Icono from '../../img/Icono.png'
 import React, {useEffect,useState} from 'react'
+import { Redirect } from 'react-router';
 const API = process.env.REACT_APP_API;
 
 export default function Login() {
 
     const [id,setId] = useState("")
     const [password,setPassword] = useState("")
+    const [verifiedUser, setVerifiedUser] = useState(false)
 
     const verifyCompletedInputs = () =>{
         if(id.length < 1 || password.length < 1){
@@ -39,24 +41,17 @@ export default function Login() {
                     password
                 })
             })
-            .then(res => res.json())
-            .then(res => {
-            if (res.success) {
-                console.log("Existe")
-            }else{
-                console.log("ERROR")
-            }
-            })
-            .catch(function() {
-            alert("Can't connect to backend try latter");
-            });
-            alert(token)
+            const token = await res.json();
+            localStorage.setItem("token",token.token)
+            setVerifiedUser(true)
         }
     }
 
     return (
         <div className="d-flex flex-column containerApp justify-content-center align-items-center">
-            <form onSubmit={handleSubmit} className="d-flex flex-column w-75 pt-3 pb-4 justify-content-center align-items-center bgform">
+            {
+                !verifiedUser?
+                <form onSubmit={handleSubmit} className="d-flex flex-column w-75 pt-3 pb-4 justify-content-center align-items-center bgform">
                 <div>
                     <img src={Icono} alt="LOGO" />
                 </div>
@@ -86,6 +81,11 @@ export default function Login() {
                 </div>
                 <a href="#" className="fs-5 text-light pt-2 pb-2 linkPassword">Olvidaste la contraseña?</a>
             </form>
+            :
+            <div>
+                <Redirect to="prueba"/>
+            </div>
+            }
         </div>
-    )
+        )
 }
