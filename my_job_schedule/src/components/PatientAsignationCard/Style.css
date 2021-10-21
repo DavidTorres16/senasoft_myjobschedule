@@ -9,6 +9,16 @@
     border-radius: 15px;
 }
 
+.bgFormMed{
+    background-color: #e6b8008e ;
+    border-radius: 15px;
+}
+
+.bgFormGen{
+    background-color: #66645b8e ;
+    border-radius: 15px;
+}
+
 .formTitle{
     color: #fff;
     font-weight: bold;
