@@ -7,7 +7,12 @@ from funtion_jwt import write_token,valida_token
 from funtion_mail import sendMail
 from os import getenv
 
+# Importamos librerias 
+
 app = Flask(__name__)
+
+
+# Configuracion de la base de datos 
 
 app.config['MYSQL_HOST'] = getenv('MYSQL_HOST')
 app.config['MYSQL_USER'] = getenv('MYSQL_USER')
@@ -15,9 +20,14 @@ app.config['MYSQL_PASSWORD'] = getenv("MYSQL_PASSWORD")
 app.config['MYSQL_DB'] = getenv('MYSQL_DB')
 
 mysql = MySQL(app)
+
+
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
+
+
 app.register_blueprint(routes_auth,url_prefix="/api")
 
+#Registro del personal de enfermeras
 @app.route('/staffRegistry',methods=["POST"])
 def staffRegistry():
     data=request.json
@@ -44,7 +54,7 @@ def staffRegistry():
     else:
         return jsonify(exist = True)
 
-
+#Inicio de Sesión
 @app.route('/login', methods=['POST'])
 def login():
     data=request.json
@@ -63,6 +73,12 @@ def login():
 def verify():
     token=request.headers["Authorization"].split(' ')[1]
     return valida_token(token,output=True)
+
+@app.route('/verify')
+def verifyToken():
+    token=request.get_json()
+    return valida_token(token,output=True)
+
 
 @app.route('/registerWorkshift',methods=["POST"])
 def registerWorkshift():
@@ -89,9 +105,22 @@ def registerWorkshift():
 
 @app.route('/cronograma')
 def cronograma():
-    cur=mysql.connection.cursor()
-
+    data=request.json
+    gropuquantity=data["gropuquantity"]
+    patientype=data["patientype"]
+    turno=data["turno"]
+    cur = mysql.connection.cursor()
+    
+    #se debe crear el número de pacientes a atender 
+    # creo la cantidad de  pacientes requeridos pacientes
+    cur.execute(f"SELECT * FROM patientsgroup WHERE gropuquantity = '{gropuquantity}' ")
+    if data.fetchall()>1:
+        mysql.connection.commit()
+        cur.execute(f"SELECT * FROM staff WHERE specialities= '{patientype}'")
+    else:
+        pass
+    # buscar si hay enfermeras para ese tipo de paciente 
 
 if __name__ == '__main__':
     load_dotenv()
-    app.run(debug=True)
+    app.run(debug=True,port=getenv('PORT'))
