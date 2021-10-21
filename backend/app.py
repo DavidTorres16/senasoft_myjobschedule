@@ -48,6 +48,16 @@ def staffRegistry():
     else:
         return jsonify(exist = True)
 
+
+@app.route('/token')
+def token():
+    data=request.json
+    token=write_token(data)
+    print(data)
+    print(f"token {token}")
+
+    return token
+
 @app.route('/login', methods=['POST'])
 def login():
     data2=request.json
