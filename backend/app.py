@@ -1,4 +1,4 @@
-from flask import Flask ,request ,jsonify
+from flask import Flask, json ,request ,jsonify
 from flask_mysqldb import MySQL
 from routes.auth import routes_auth
 from dotenv import load_dotenv
@@ -20,30 +20,31 @@ app.register_blueprint(routes_auth,url_prefix="/api")
 
 @app.route('/staffRegistry',methods=["POST"])
 def staffRegistry():
+    print(request.json)
     data=request.json
     id=data["id"]
     name=data["name"]
     lastname=data["lastname"]
     phonenumber=data["phonenumber"]
     specialities=data["specialities"]
-    specialities=data["specialities"]
-    staffrestricttions=data["staffrestrictions"]
+    staffrestricttions= 1
     passwords=data["passwords"]
 
+
     cur = mysql.connection.cursor()
-    cur.execute(f"SELECT * FROM Staff WHERE id='{id}'")
+    cur.execute(f"SELECT * FROM staff WHERE id='{id}'")
     alreadyExist= cur.fetchone()
     mysql.connection.commit()
     cur.close()
     if alreadyExist == None:
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO staff (id,name,lastname,phonenumber,specialities,staffrestrictions) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)",
+        cur.execute("INSERT INTO staff (id,name,lastname,phonenumber,specialities,staffrestrictions,password) VALUES(%s,%s,%s,%s,%s,%s,%s)",
         (id,name,lastname,phonenumber,specialities,staffrestricttions,passwords))
         mysql.connection.commit()
         cur.close() 
-        return jsonify(exist = False)
+        return (jsonify(exist = False))
     else:
-        return jsonify(exist = True)
+        return (jsonify(exist = True))
 
 
 @app.route('/login', methods=['POST'])
@@ -52,13 +53,12 @@ def login():
     id=data["id"]
     password=data["password"]
     cur = mysql.connection.cursor()
-    cur.execute(f"SELECT * FROM Staff WHERE id = '{id}' and password = '{password}'")
+    cur.execute(f"SELECT * FROM staff WHERE id = '{id}' and password = '{password}'")
+    print("buscó")
     data= cur.fetchone()
     if data != None:
-        token=write_token(data)
-        token=str(token).split("'")[1]
-        return jsonify({"token":token})
-        print()
+        print("crea token")
+        return write_token(request.get_json)
     else:
         return jsonify(exist = False)
 

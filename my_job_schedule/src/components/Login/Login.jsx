@@ -25,20 +25,22 @@ export default function Login() {
     }
 
     const handleSubmit = async(e) =>{
+        e.preventDefault();
         const completedInputs = verifyCompletedInputs()
         if(completedInputs){
             const res = await fetch(`${API}/login`,{
                 method: 'POST',
                 headers:{
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
                 },
                 body: JSON.stringify({
                     id,
                     password
                 })
             })
-            const data = await res.json()
-            console.log(data)
+            const token = await res.json();
+            alert(token)
         }
     }
 
