@@ -1,4 +1,4 @@
-from flask import Flask ,request ,jsonify
+from flask import Flask, json ,request ,jsonify
 from flask_mysqldb import MySQL
 from routes.auth import routes_auth
 from dotenv import load_dotenv
@@ -30,14 +30,16 @@ app.register_blueprint(routes_auth,url_prefix="/api")
 #Registro del personal de enfermeras
 @app.route('/staffRegistry',methods=["POST"])
 def staffRegistry():
+    print(request.json)
     data=request.json
     id=data["id"]
     name=data["name"]
     lastname=data["lastname"]
     phonenumber=data["phonenumber"]
     specialities=data["specialities"]
-    staffrestricttions=data["staffrestrictions"]
+    staffrestricttions= 1
     passwords=data["passwords"]
+
 
     cur = mysql.connection.cursor()
     cur.execute(f"SELECT * FROM staff WHERE id='{id}'")
@@ -46,18 +48,19 @@ def staffRegistry():
     cur.close()
     if alreadyExist == None:
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO staff (id,name,lastname,phonenumber,specialities,staffrestrictions,passwords) VALUES(%s,%s,%s,%s,%s,%s,%s)",
+        cur.execute("INSERT INTO staff (id,name,lastname,phonenumber,specialities,staffrestrictions,password) VALUES(%s,%s,%s,%s,%s,%s,%s)",
         (id,name,lastname,phonenumber,specialities,staffrestricttions,passwords))
         mysql.connection.commit()
         cur.close() 
-        return jsonify(exist = False)
+        return (jsonify(exist = False))
     else:
-        return jsonify(exist = True)
+        return (jsonify(exist = True))
 
 #Inicio de Sesión
 @app.route('/login', methods=['POST'])
 def login():
     data=request.json
+    print(request.json)
     id=data["id"]
     password=data["password"]
     cur = mysql.connection.cursor()

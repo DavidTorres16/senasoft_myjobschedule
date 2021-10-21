@@ -1,0 +1,41 @@
+
+.bgFormVen{
+    background-color: #d7282e6b;
+    border-radius: 15px;
+}
+
+.bgFormChildren{
+    background-color: #0080376b;
+    border-radius: 15px;
+}
+
+.bgFormMed{
+    background-color: #e6b8008e ;
+    border-radius: 15px;
+}
+
+.bgFormGen{
+    background-color: #66645b8e ;
+    border-radius: 15px;
+}
+
+.formTitle{
+    color: #fff;
+    font-weight: bold;
+}
+
+.btnForms{
+    background-color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    color: #273c75;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { -moz-appearance:textfield; }
+
