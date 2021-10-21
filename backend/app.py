@@ -105,15 +105,40 @@ def registerWorkshift():
     else:
         return jsonify(exist = True)
     
+#Se crea el paciente
+@app.route('/patientRegistry')
+def patientRegistry():
+    data=request.json
+    patientype=data["patientype"]
+    groupquantity=data["patientsNumber"]
+    serviceHours=data["serviceHours"] 
+    cur = mysql.connection.cursor()
+    cur.execute(" INSERT INTO patientsgroup` (`groupquantity`, `patientype`,servicehours )  VALUES(%s,%s,%s)",(groupquantity,patientype,serviceHours))
+    mysql.connection.commit()
+    cur.close()
+    return jsonify(data)
+    #se debe crear el número de pacientes a atender 
+    
 
-@app.route('/cronograma')
+    cur.execute(f"SELECT * FROM patientsgroup WHERE gropuquantity = '{gropuquantity}' ")
+    if data.fetchall()>1:
+        mysql.connection.commit()
+        cur.execute(f"SELECT * FROM staff WHERE specialities= '{patientype}'")
+    else:
+        pass
+    # buscar si hay enfermeras para ese tipo de paciente 
+
+
 def cronograma():
     data=request.json
+    serviceHours=data["serviceHours"]
+    patientsNumber=data["patientsNumber"]         
     gropuquantity=data["gropuquantity"]
     patientype=data["patientype"]
     turno=data["turno"]
     cur = mysql.connection.cursor()
-    
+
+
     #se debe crear el número de pacientes a atender 
     # creo la cantidad de  pacientes requeridos pacientes
     cur.execute(f"SELECT * FROM patientsgroup WHERE gropuquantity = '{gropuquantity}' ")
@@ -123,6 +148,7 @@ def cronograma():
     else:
         pass
     # buscar si hay enfermeras para ese tipo de paciente 
+
 
 if __name__ == '__main__':
     load_dotenv()
