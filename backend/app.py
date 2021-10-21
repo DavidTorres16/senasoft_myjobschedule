@@ -61,8 +61,6 @@ def login():
     cur = mysql.connection.cursor()
     cur.execute(f"SELECT * FROM Staff WHERE id = '{id}' and password = '{password}'")
     data= cur.fetchone()
-    
-    
     if data != None:
         token=write_token(data)
         token=str(token).split("'")[1]
@@ -70,6 +68,7 @@ def login():
         print()
     else:
         return jsonify(exist = False)
+
 @app.route('/verify')
 def verify():
     token=request.headers["Authorization"].split(' ')[1]
@@ -78,62 +77,25 @@ def verify():
 @app.route('/registerWorkshift',methods=["POST"])
 def registerWorkshift():
     data=request.json()
-    name=data["name"]
-    lastname=data["lastname"]
-    phonenumber=data["phonenumber"]
-    email=data["email"]
-    password=data["password"]
+    id=data["id"]
+    staffid=data["staffid"]
+    shiftDay=data["shift_day"]
+    starttime=data["starttime"]
+    finishtime=data["finishtime"]
+    patientsgroup=data["patientsgroup"]
     cur = mysql.connection.cursor()
     alreadyExist= cur.fetchall()
     mysql.connection.commit()
     cur.close()
     if alreadyExist == None:
         cur = mysql.connection.cursor()
-        cur.execute(f"INSERT INTO `sena`.`workshift` (`shiftid`, `staffid`, `position`, `staffname`, `stafflastname`, `shiftDay`, `starttime`, `finishtime`, `news`) VALUES ('', '2', '2', '2', '4', '5', '05:00:00', '05:00:00', 'yes')",
-        (name,lastname,phonenumber,email,password))
+        cur.execute("INSERT INTO workshift (`shiftid`, `staffid`, `shfitDay`, `starttime, `finishtime`, `patientsgroup` ) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)",(id,staffid,staffid,shiftDay,starttime,finishtime,patientsgroup))
         mysql.connection.commit()
         cur.close()
         return jsonify(exist = False)
     else:
         return jsonify(exist = True)
     
-
-    def cronograma():
-        pacientes={
-            "número":25,
-            "id":"especialidad",
-            "turno":"1"
-        }
-        paciente1={
-            "tipoPaciente":25,
-            "especialidad":"niños",
-            "turno":"3"
-        }
-        paciente2={
-            "tipoPaciente":25,
-            "especialidad":"niños",
-            "turno":"2"
-        }
-
-        enfermera1={
-            "idNombre":1,
-            "Nombre":"Camila",
-            "especialidad":"niños"
-        }
-
-        enfermera2={
-            "idNombre":1,
-            "Nombre":"luisa",
-            "especialidad":"general"
-        }
-        enfermera3={
-            "idNombre":1,
-            "Nombre":"rosa",
-            "especialidad":"pediatria"
-        }
-
-
-
 
 if __name__ == '__main__':
     load_dotenv()
