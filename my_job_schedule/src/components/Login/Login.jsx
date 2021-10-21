@@ -42,8 +42,8 @@ export default function Login() {
                 })
             })
             const token = await res.json();
-            localStorage.setItem("token",token.token)
-            setVerifiedUser(true)
+            let existingToken = token != null || token.length <1 ? localStorage.setItem("token",token.token) : false
+            existingToken != false ? setVerifiedUser(true) : setVerifiedUser(false)
         }
     }
 
