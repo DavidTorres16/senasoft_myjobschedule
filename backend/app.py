@@ -116,7 +116,7 @@ def patientRegistry():
     try:
         patientype=data["patientype"]
         groupquantity=data["patientsNumber"]
-        erviceHours=data["serviceHours"]
+        serviceHours=data["serviceHours"]
         cur = mysql.connection.cursor()
         cur.execute(" INSERT INTO patientsgroup (`groupquantity`, `patientype`,servicehours )  VALUES(%s,%s,%s)",(groupquantity,patientype,serviceHours))
         mysql.connection.commit()
