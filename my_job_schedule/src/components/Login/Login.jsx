@@ -1,12 +1,14 @@
 import'./Style.css'
 import Icono from '../../img/Icono.png'
 import React, {useEffect,useState} from 'react'
+import { Redirect } from 'react-router';
 const API = process.env.REACT_APP_API;
 
 export default function Login() {
 
     const [id,setId] = useState("")
     const [password,setPassword] = useState("")
+    const [verifiedUser, setVerifiedUser] = useState(false)
 
     const verifyCompletedInputs = () =>{
         if(id.length < 1 || password.length < 1){
@@ -25,26 +27,31 @@ export default function Login() {
     }
 
     const handleSubmit = async(e) =>{
+        e.preventDefault();
         const completedInputs = verifyCompletedInputs()
         if(completedInputs){
             const res = await fetch(`${API}/login`,{
                 method: 'POST',
                 headers:{
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
                 },
                 body: JSON.stringify({
                     id,
                     password
                 })
             })
-            const data = await res.json()
-            console.log(data)
+            const token = await res.json();
+            let existingToken = token != null || token.length <1 ? localStorage.setItem("token",token.token) : false
+            existingToken != false ? setVerifiedUser(true) : setVerifiedUser(false)
         }
     }
 
     return (
         <div className="d-flex flex-column containerApp justify-content-center align-items-center">
-            <form onSubmit={handleSubmit} className="d-flex flex-column w-75 pt-3 pb-4 justify-content-center align-items-center bgform">
+            {
+                !verifiedUser?
+                <form onSubmit={handleSubmit} className="d-flex flex-column w-75 pt-3 pb-4 justify-content-center align-items-center bgform">
                 <div>
                     <img src={Icono} alt="LOGO" />
                 </div>
@@ -74,6 +81,11 @@ export default function Login() {
                 </div>
                 <a href="#" className="fs-5 text-light pt-2 pb-2 linkPassword">Olvidaste la contraseña?</a>
             </form>
+            :
+            <div>
+                <Redirect to="prueba"/>
+            </div>
+            }
         </div>
-    )
+        )
 }
