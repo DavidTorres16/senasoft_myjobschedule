@@ -39,7 +39,17 @@ export default function Login() {
                     password
                 })
             })
-            const token = await res.json();
+            .then(res => res.json())
+            .then(res => {
+            if (res.success) {
+                console.log("Existe")
+            }else{
+                console.log("ERROR")
+            }
+            })
+            .catch(function() {
+            alert("Can't connect to backend try latter");
+            });
             alert(token)
         }
     }

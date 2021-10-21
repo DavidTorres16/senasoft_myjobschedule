@@ -50,15 +50,14 @@ def staffRegistry():
 @app.route('/login', methods=['POST'])
 def login():
     data=request.json
+    print(request.json)
     id=data["id"]
     password=data["password"]
     cur = mysql.connection.cursor()
     cur.execute(f"SELECT * FROM staff WHERE id = '{id}' and password = '{password}'")
-    print("buscó")
     data= cur.fetchone()
     if data != None:
-        print("crea token")
-        return write_token(request.get_json)
+        return write_token(request.get_json())
     else:
         return jsonify(exist = False)
 
@@ -89,6 +88,11 @@ def registerWorkshift():
     else:
         return jsonify(exist = True)
     
+
+@app.route('/cronograma')
+def cronograma():
+    cur=mysql.connection.cursor()
+
 
 if __name__ == '__main__':
     load_dotenv()
