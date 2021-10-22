@@ -6,7 +6,7 @@ export default function LinkAsButtonCard(props) {
     console.log(propArray)
     return (
         <div className="bgButton">
-            <Link>Hola</Link>
+            <Link to={propArray[1]}>{propArray[0]}</Link>
         </div>
     )
 }

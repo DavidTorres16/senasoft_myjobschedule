@@ -10,7 +10,7 @@ export default function Registry() {
     const [id,setId] = useState("")
     const [name,setName] = useState("")
     const [lastName,setLastName] = useState("")
-    const [speciality,setSpeciality] = useState("")
+    const [speciality,setSpeciality] = useState(4)
     const [phoneNumber,setPhoneNumber] = useState("")
     const staffrestricttions = 1
 
@@ -60,7 +60,12 @@ export default function Registry() {
                 })
             })
             const data = await res.json();
-            const userExist = data.exist === true ? alert("Este usuario ya ha sido registrado anteriormente"): ("Usuario registrado exitosamente")
+            if(data.exist != true){
+                alert("Usuario registrado exitosamente")
+            }
+            else{
+                alert("Este usuario ya ha sido registrado anteriormente")
+            } 
         }
     }
 
