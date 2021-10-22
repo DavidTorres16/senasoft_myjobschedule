@@ -181,32 +181,6 @@ def patientRegistry():
         pass
     # buscar si hay enfermeras para ese tipo de paciente 
 
-@app.route('/staffSchedule',methods=["POST"])
-def staffSchedule():
-    # token
-    data=request.json
-    
-    #se debe crear el número de pacientes a atender 
-    try:
-        token=request.headers["Authorization"].split(' ')[1]
-        data= (valida_token(token,output=True))
-        id= data["id"]
-        cur = mysql.connection.cursor()
-        print ("falle")
-    #    cur.execute(" INSERT INTO patientsgroup (`groupquantity`, `patientype`,servicehours )  VALUES(%s,%s,%s)",(groupquantity,patientype,serviceHours))
-        mysql.connection.commit()
-        cur.execute(f" select *  from staff  where id NOT IN  (select staffid from workshift )")
-    #   cur.execute(f" select *  from staff  where specialities={patientype} and id NOT IN  (select staffid from workshift  )")
-        mysql.connection.commit()
-        return jsonify(data)
-
-        #se debe crear el número de pacientes a atender 
-        # creo la cantidad de  pacientes requeridos pacientes
-
-    except : 
-        return jsonify({"Message":"Faltan datos"})
-
-
 
 
 @app.route('/indexPage',methods=["POST",'GET'])
@@ -224,8 +198,8 @@ def retorno():
     return jsonify(data)
 
 
-@app.route('/prueba')
-def cronograma():
+@app.route('/staffSchedule',methods=["POST"])
+def staffSchedule():
     data=request.json
     patientype=data["patientype"]
     year=datetime.now().year
@@ -234,7 +208,7 @@ def cronograma():
     cur = mysql.connection.cursor()
     mysql.connection.commit()
 
-    cur.execute(f"select *  from staff  where specialities='{patientype}' and id NOT IN  (select staffid from workshift  )")
+    cur.execute(f"select *  from staff  where specialities='{}' and id NOT IN  (select staffid from workshift  )")
     
 
     enfermera=cur.fetchone()
