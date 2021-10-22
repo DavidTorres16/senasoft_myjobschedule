@@ -1,4 +1,6 @@
+import { FaUserMd } from "react-icons/fa";
 import './Style.css';
+import Select from 'react-select'
 import React, {useEffect,useState} from 'react'
 const API= process.env.REACT_APP_API;
 
@@ -8,11 +10,24 @@ export default function Registry() {
     const [id,setId] = useState("")
     const [name,setName] = useState("")
     const [lastName,setLastName] = useState("")
-    const [email,setEmail] = useState("")
+    const [speciality,setSpeciality] = useState("")
     const [phoneNumber,setPhoneNumber] = useState("")
+    const staffrestricttions = 1
+
+    const SelectOptions = [
+        {value: 1, label: "Ventilación"},
+        {value: 2, label: "Infantes"},
+        {value: 3, label: "Administración de medicamentos"},
+        {value: 4, label: "General"}
+    ]
+    
+    const handleSelectChange = selectedOption => {
+        setSpeciality(selectedOption.value)
+        console.log(selectedOption.value)
+    }
 
     const verifyCompletedInputs = () =>{
-        if(name.length <1 || lastName.length <1 || email.length <1 || phoneNumber.length <1 || password.length <1 || id.length <1){
+        if(name.length <1 || lastName.length <1 || phoneNumber.length <1 || password.length <1 || id.length <1){
             alert("Por favor rellene todos los campos")
             return false
         }
@@ -27,27 +42,35 @@ export default function Registry() {
         }
     }
 
+
     const handleSubmit = async (e) => {
         const completedInputs = verifyCompletedInputs()
         if(completedInputs){
+            e.preventDefault();
             const res = await fetch(`${API}/staffRegistry`,{
                 method: 'POST',
                 headers: {'Content-Type':'application/json'},
                 body: JSON.stringify({
-                    name,
-                    lastName,
-                    email,
-                    phoneNumber
+                    id,
+                    name : name,
+                    lastname : lastName,
+                    specialities: speciality,
+                    phonenumber: phoneNumber,
+                    passwords: password
                 })
             })
-            const data = await res.json()
-            console.log(data)
+            const data = await res.json();
+            const userExist = data.exist === true ? alert("Este usuario ya ha sido registrado anteriormente"): ("Usuario registrado exitosamente")
         }
     }
 
     return (
         <div className="d-flex flex-column containerApp justify-content-center align-items-center">
             <form onSubmit={handleSubmit} className="d-flex flex-column w-100 pt-3 pb-4 justify-content-center align-items-center bgform">
+                <div>
+                    <span className="iconUser"> <FaUserMd/> </span>
+                </div>
+                
                 <div className="mb-3 d-flex flex-column w-75">
                     <label htmlFor="rdoc" className="form-label text-light">Número de documento</label>
                     <input type="text" 
@@ -81,13 +104,18 @@ export default function Registry() {
                 </div>
 
                 <div className="mb-3 d-flex flex-column w-75">
-                    <label htmlFor="remail" className="form-label text-light">Email</label>
-                    <input type="text" 
-                    placeholder="Email" 
-                    className="form-control inputs" id="remail" 
-                    onChange={e => setEmail(e.target.value)} value={email}/>
+                    <label htmlFor="especility" className="form-label text-light">Especialidad (seleccione una)</label>
+                    <Select name="select" className="selectSpecility " id="especility"
+                        defaultValue={SelectOptions[3]}
+                        isDisabled={false}
+                        isLoading={false}
+                        isClearable={false}
+                        isSearchable={true}
+                        name="Especialidad"
+                        options={SelectOptions}
+                        onChange={handleSelectChange}
+                    />
                 </div>
-
                 <div className="mb-3 d-flex flex-column w-75">
                     <label htmlFor="rpassword" className="form-label text-light">Contraseña</label>
                     <input type="password" 
@@ -97,7 +125,7 @@ export default function Registry() {
                 </div>
 
                 <div className="d-grid w-75">
-                    <input type="submit" className="btn btn-success p-3 w-100" value="IniciarSesion"/>
+                    <input type="submit" className="btn btn-success p-3 w-100" value="Registrar"/>
                 </div>
             </form>
         </div>

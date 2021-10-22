@@ -12,11 +12,21 @@
     border-style: none;
 }
 
+.selectSpecility {
+    border-radius: 0px 25px 25px 0px;
+    border-style: none;
+    padding:5px 0px 5px 0px;
+}
+
 .bgform{
     background-color: #273c75b6;
     border-radius: 1em;
 }
 
+.iconUser{
+    color: #fff;
+    font-size: 6rem;
+}
 
 
 

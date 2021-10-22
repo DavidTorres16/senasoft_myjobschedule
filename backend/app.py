@@ -1,5 +1,4 @@
-from MySQLdb import cursors
-from flask import Flask ,request ,jsonify
+from flask import Flask, json ,request ,jsonify
 from flask_mysqldb import MySQL
 from routes.auth import routes_auth
 from dotenv import load_dotenv
@@ -8,9 +7,12 @@ from funtion_jwt import write_token,valida_token
 from funtion_mail import sendMail
 from os import getenv
 
+# Importamos librerias 
 
 app = Flask(__name__)
 
+
+# Configuracion de la base de datos 
 
 app.config['MYSQL_HOST'] = getenv('MYSQL_HOST')
 app.config['MYSQL_USER'] = getenv('MYSQL_USER')
@@ -18,48 +20,55 @@ app.config['MYSQL_PASSWORD'] = getenv("MYSQL_PASSWORD")
 app.config['MYSQL_DB'] = getenv('MYSQL_DB')
 
 mysql = MySQL(app)
+
+
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
+
+
 app.register_blueprint(routes_auth,url_prefix="/api")
 
-
-
-
-
+#Registro del personal de enfermeras
 @app.route('/staffRegistry',methods=["POST"])
 def staffRegistry():
+    print(request.json)
     data=request.json
+    id=data["id"]
     name=data["name"]
     lastname=data["lastname"]
     phonenumber=data["phonenumber"]
-    email=data["email"]
-    password=data["password"]
+    specialities=data["specialities"]
+    staffrestricttions= 1
+    passwords=data["passwords"]
+
+
     cur = mysql.connection.cursor()
-    cur.execute(f"SELECT * FROM Staff WHERE email='{email}'")
+    cur.execute(f"SELECT * FROM staff WHERE id='{id}'")
     alreadyExist= cur.fetchone()
     mysql.connection.commit()
     cur.close()
     if alreadyExist == None:
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO Staff (name,lastname,phonenumber,email,password) VALUES(%s,%s,%s,%s,%s)",
-        (name,lastname,phonenumber,email,password))
+        cur.execute("INSERT INTO staff (id,name,lastname,phonenumber,specialities,staffrestrictions,password) VALUES(%s,%s,%s,%s,%s,%s,%s)",
+        (id,name,lastname,phonenumber,specialities,staffrestricttions,passwords))
         mysql.connection.commit()
         cur.close() 
-        return jsonify(exist = False)
+        return (jsonify(exist = False))
     else:
-        return jsonify(exist = True)
+        return (jsonify(exist = True))
 
+#Inicio de Sesión
 @app.route('/login', methods=['POST'])
 def login():
-    data2=request.json
-    token=write_token(data2)
+    data=request.json
     print(request.json)
-    email = request.json["id"]
-    password= request.json["password"]
+    id=data["id"]
+    password=data["password"]
     cur = mysql.connection.cursor()
-    cur.execute(f"SELECT * FROM Staff WHERE email = '{email}' and password = '{password}'")
+    cur.execute(f"SELECT * FROM staff WHERE id = '{id}' and password = '{password}'")
     data= cur.fetchone()
     if data != None:
-        return write_token(data=request.get_json())
+        token=str(write_token(request.get_json())).split("'")[1]
+        return jsonify({"token":token})
     else:
         return jsonify(exist = False)
 
@@ -67,39 +76,98 @@ def login():
 def verify():
     token=request.headers["Authorization"].split(' ')[1]
     return valida_token(token,output=True)
-    
+
+@app.route('/verify')
+def verifyToken():
+    token=request.get_json()
+    return valida_token(token,output=True)
+
 
 @app.route('/registerWorkshift',methods=["POST"])
 def registerWorkshift():
-    data=request.json()
-    name=data["name"]
-    lastname=data["lastname"]
-    phonenumber=data["phonenumber"]
-    email=data["email"]
-    password=data["password"]
-    cur = mysql.connection.cursor()
-    alreadyExist= cur.fetchall()
-    mysql.connection.commit()
-    cur.close()
-    if alreadyExist == None:
+    try:
+
+        data=request.json()
+        id=data["id"]
+        staffid=data["staffid"]
+        shiftDay=data["shift_day"]
+        starttime=data["starttime"]
+        finishtime=data["finishtime"]
+        patientsgroup=data["patientsgroup"]
         cur = mysql.connection.cursor()
-        cur.execute(f"INSERT INTO `sena`.`workshift` (`shiftid`, `staffid`, `position`, `staffname`, `stafflastname`, `shiftDay`, `starttime`, `finishtime`, `news`) VALUES ('', '2', '2', '2', '4', '5', '05:00:00', '05:00:00', 'yes')",
-        (name,lastname,phonenumber,email,password))
+        alreadyExist= cur.fetchall()
         mysql.connection.commit()
         cur.close()
-        return jsonify(exist = False)
+        if alreadyExist == None:
+            cur = mysql.connection.cursor()
+            cur.execute("INSERT INTO workshift (`shiftid`, `staffid`, `shfitDay`, `starttime, `finishtime`, `patientsgroup` ) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)",(id,staffid,staffid,shiftDay,starttime,finishtime,patientsgroup))
+            mysql.connection.commit()
+            cur.close()
+            return jsonify(exist = False)
+        else:
+            return jsonify(exist = True)
+    except :
+        return jsonify({"Message":"Datos Faltantes"})
+#Se crea el paciente
+@app.route('/patientRegistry', methods=["POST"])
+def patientRegistry():
+    data=request.json
+    #se debe crear el número de pacientes a atender 
+    try:
+        patientype=data["patientype"]
+        groupquantity=data["patientsNumber"]
+        serviceHours=data["serviceHours"]
+        cur = mysql.connection.cursor()
+        cur.execute(" INSERT INTO patientsgroup (`groupquantity`, `patientype`,servicehours )  VALUES(%s,%s,%s)",(groupquantity,patientype,serviceHours))
+        mysql.connection.commit()
+        cur.close()
+        return jsonify({"Message":"Pacientes Registrados"})
+
+
+    except : 
+        return jsonify({"Message":"Faltan datos"})
+
+    cur.execute(f"SELECT * FROM patientsgroup WHERE gropuquantity = '{gropuquantity}' ")
+    if data.fetchall()>1:
+        mysql.connection.commit()
+        cur.execute(f"SELECT * FROM staff WHERE specialities= '{patientype}'")
     else:
-        return jsonify(exist = True)
+        pass
+    # buscar si hay enfermeras para ese tipo de paciente 
+
+
+def cronograma():
+
+    # token
+
+
+    data=request.json
+    #se debe crear el número de pacientes a atender 
+    try:
+        patientype=data["patientype"]
+        groupquantity=data["patientsNumber"]
+        serviceHours=data["serviceHours"]
+        cur = mysql.connection.cursor()
+        cur.execute(" INSERT INTO patientsgroup (`groupquantity`, `patientype`,servicehours )  VALUES(%s,%s,%s)",(groupquantity,patientype,serviceHours))
+        mysql.connection.commit()
+        cur.close()
+        return jsonify({"Message":"Pacientes Registrados"})
+        #se debe crear el número de pacientes a atender 
+        # creo la cantidad de  pacientes requeridos pacientes
+
+    except : 
+        return jsonify({"Message":"Faltan datos"})
 
 
 
-@app.route('/validateHours/<id>')
+@app.route('/indexPage',methods=["POST",'GET'])
+def retorno():
+    token=request.headers["Authorization"]
+    return jsonify({"token_retornar":token})
 
-def validateHours(id):
-    cur=mysql.Connection()
-    cur.execute(""" SELECT * from Workshift where  (starttime) """)
+
 
 
 if __name__ == '__main__':
     load_dotenv()
-    app.run(debug=True)
+    app.run(debug=True,port=getenv('PORT'))

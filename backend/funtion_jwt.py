@@ -17,7 +17,6 @@ def valida_token(token,output=False):
     try:
         if output:
             return decode(token,key=getenv("SECRET"),algorithms=["HS256"])
-  
     except exceptions.DecodeError:
         response=jsonify({"message":"Invalid Token"})
         response.status_code=401
@@ -26,5 +25,3 @@ def valida_token(token,output=False):
         response=jsonify({"message":"Signature Token Expired"})
         response.status_code=401
         return response
-
-
