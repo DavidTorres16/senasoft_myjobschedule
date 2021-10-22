@@ -91,9 +91,9 @@ export default function StaffSchedule(props) {
     }, [])
 
 
-    // useEffect(() => {
-    //     getSchedule()
-    // }, [])
+    useEffect(() => {
+        getSchedule()
+    }, [])
 
     return (
         <div className="shulde">
