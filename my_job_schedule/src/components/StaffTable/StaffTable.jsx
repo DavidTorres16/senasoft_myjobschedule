@@ -9,20 +9,20 @@ export default function StaffTable() {
     const [staffData,setStaffData] = useState([])
     const [state, setState] = useState(false)
 
-    const getStaffData = async() =>{
-        const res = await fetch(`${API}/staffCards`,{
-            'Authorization':`JSW ${localStorage.getItem("token")}`
-        })
-        const data = await res.json();
-        console.log("-------------")
-        if(data != null){
-            setStaffData(JSON.parse(data))
-        }
-    }
+    // const getStaffData = async() =>{
+    //     const res = await fetch(`${API}/staffCards`,{
+    //         'Authorization':`JSW ${localStorage.getItem("token")}`
+    //     })
+    //     const data = await res.json();
+    //     console.log("-------------")
+    //     if(data != null){
+    //         setStaffData(JSON.parse(data))
+    //     }
+    // }
 
-    useEffect(() => {
-        setStaffData(getStaffData())
-    }, [])
+    // useEffect(() => {
+    //     setStaffData(getStaffData())
+    // }, [])
 
     return (
         <div className="d-flex flex-column bg-containerApp justify-content-center align-items-center">
