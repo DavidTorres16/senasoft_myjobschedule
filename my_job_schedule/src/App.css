@@ -1,13 +1,20 @@
 body{
   background-image: url(./img/bgApp.jpg);
+  /* width: 100vw;
+  height: 100vh; */
 }
 
 .App {
   text-align: center;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   width: 100vw;
   display: flex;

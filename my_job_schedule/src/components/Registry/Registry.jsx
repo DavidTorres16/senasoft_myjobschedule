@@ -1,3 +1,4 @@
+import { FaUserMd } from "react-icons/fa";
 import './Style.css';
 import Select from 'react-select'
 import React, {useEffect,useState} from 'react'
@@ -9,7 +10,7 @@ export default function Registry() {
     const [id,setId] = useState("")
     const [name,setName] = useState("")
     const [lastName,setLastName] = useState("")
-    const [speciality,setSpeciality] = useState("")
+    const [speciality,setSpeciality] = useState(4)
     const [phoneNumber,setPhoneNumber] = useState("")
     const staffrestricttions = 1
 
@@ -59,13 +60,22 @@ export default function Registry() {
                 })
             })
             const data = await res.json();
-            const userExist = data.exist === true ? alert("Este usuario ya ha sido registrado anteriormente"): ("Usuario registrado exitosamente")
+            if(data.exist != true){
+                alert("Usuario registrado exitosamente")
+            }
+            else{
+                alert("Este usuario ya ha sido registrado anteriormente")
+            } 
         }
     }
 
     return (
         <div className="d-flex flex-column containerApp justify-content-center align-items-center">
             <form onSubmit={handleSubmit} className="d-flex flex-column w-100 pt-3 pb-4 justify-content-center align-items-center bgform">
+                <div>
+                    <span className="iconUser"> <FaUserMd/> </span>
+                </div>
+                
                 <div className="mb-3 d-flex flex-column w-75">
                     <label htmlFor="rdoc" className="form-label text-light">Número de documento</label>
                     <input type="text" 
@@ -120,7 +130,7 @@ export default function Registry() {
                 </div>
 
                 <div className="d-grid w-75">
-                    <input type="submit" className="btn btn-success p-3 w-100" value="IniciarSesion"/>
+                    <input type="submit" className="btn btn-success p-3 w-100" value="Registrar"/>
                 </div>
             </form>
         </div>

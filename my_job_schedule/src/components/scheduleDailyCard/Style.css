@@ -1,0 +1,23 @@
+
+
+.card{
+    background-color: rgba(175, 184, 192, 0.699);
+    color:rgb(25, 42, 117);
+    border-radius: 7px;
+    margin: 10px;
+    font-size: 10px;
+    line-height: 0.6rem;
+    padding: 0.2rem;
+}
+
+.card h5{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.card p{
+    text-align: left;
+    font-size: 10px;
+}
+
+
