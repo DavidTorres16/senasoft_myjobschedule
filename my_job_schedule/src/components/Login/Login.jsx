@@ -42,8 +42,10 @@ export default function Login() {
                 })
             })
             const token = await res.json();
-            let existingToken = token != null || token.length <1 ? localStorage.setItem("token",token.token) : false
-            existingToken != false ? setVerifiedUser(true) : setVerifiedUser(false)
+            if(token != null){
+                localStorage.setItem("token",token.token)
+                setVerifiedUser(true)
+            }
         }
     }
 
@@ -56,7 +58,7 @@ export default function Login() {
                     <img src={Icono} alt="LOGO" />
                 </div>
                 
-                <div class="mb-3 d-flex flex-column w-75">
+                <div className="mb-3 d-flex flex-column w-75">
                 <label htmlFor="doc" className="form-label text-light">Número de documento</label>
                     <input type="text" 
                     placeholder="Documento de identidad" 
@@ -65,7 +67,7 @@ export default function Login() {
                     onChange={e => setId(e.target.value)} value={id}/>
                 </div>
 
-                <div class="mb-3 d-flex flex-column w-75">
+                <div className="mb-3 d-flex flex-column w-75">
                 <label htmlFor="password" className="form-label text-light">Password</label>
                 <input type="password" 
                     placeholder="Contraseña" 
