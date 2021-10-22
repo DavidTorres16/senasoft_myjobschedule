@@ -35,7 +35,7 @@ export function DownloadExcelButton(){
 export function ShowMoreButton(){
     return(
         <div>
-            <h1>Mostrar más</h1>
+            <p>Mostrar más</p>
         </div>
     )
 }

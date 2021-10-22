@@ -1,3 +1,4 @@
+import './Style.css'
 import React, {useState, useEffect} from 'react'
 import ScheduleDailyCard from '../ScheduleDailyCard/ScheduleDailyCard'
 
@@ -73,7 +74,7 @@ export default function StaffSchedule(props) {
     }, [])
 
     return (
-        <div className="row d-flex flex-column ">
+        <div className="">
             {/* <div className="row">
                 {weekDays.map(day =>(
                     <div className="col">{day}</div>
@@ -89,17 +90,19 @@ export default function StaffSchedule(props) {
                 </div>
             </div> */}
 
-            <div className="d-flex flex-column" >
-                <div className className="d-flex">
+            <div className="" >
+                <div className className="days">
                 {weekDays.map(day => (
-                    <div className="col">
+                    <div className="">
                         {day}
                     </div>
                 ))}
                 </div>
-                <div flex-column>
+                <div className="days">
                     {totalDaysArray.map(day =>(
-                        <ScheduleDailyCard/>
+                        <div className="">
+                            <ScheduleDailyCard/>
+                        </div>
                     ))}
                 </div>
             </div>

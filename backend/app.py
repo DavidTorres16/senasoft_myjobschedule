@@ -163,7 +163,7 @@ def cronograma():
 @app.route('/indexPage',methods=["POST",'GET'])
 def retorno():
     token=request.headers["Authorization"]
-    return jsonify({"Token retornar":token})
+    return jsonify({"token_retornar":token})
 
 
 
