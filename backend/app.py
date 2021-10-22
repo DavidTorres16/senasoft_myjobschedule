@@ -226,14 +226,15 @@ def retorno():
 
 @app.route('/prueba')
 def cronograma():
-    
+    data=request.json
+    patientype=data["patientype"]
     year=datetime.now().year
     mes=datetime.now().month
     day=lastday(year,mes)
     cur = mysql.connection.cursor()
     mysql.connection.commit()
 
-    cur.execute(f"select *  from staff  where specialities='{3}' and id NOT IN  (select staffid from workshift  )")
+    cur.execute(f"select *  from staff  where specialities='{patientype}' and id NOT IN  (select staffid from workshift  )")
     
 
     enfermera=cur.fetchone()
