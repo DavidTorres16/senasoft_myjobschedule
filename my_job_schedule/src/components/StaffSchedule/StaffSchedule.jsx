@@ -1,14 +1,19 @@
 import './Style.css'
 import React, {useState, useEffect} from 'react'
 import ScheduleDailyCard from '../ScheduleDailyCard/scheduleDailyCard'
-export default function StaffSchedule(props) {
+import VerifyUser from '../functions/verifyUser';
+const API= process.env.REACT_APP_API;
 
+export default function StaffSchedule(props) {
+    
     const date = new Date()
     const actualMonth= (date.getMonth() + 1)
     const actualYear= date.getFullYear()
     const [leapYear, setLeapYear] = useState(false)
     const [totalMonthDays, setTotalMonthDays] = useState(0)
     const [weeks, setWeeks] = useState([])
+    const [userInSession, setUserInSession] = useState(false)
+    const [staffData,setStaffData] = useState([])
     let totalDaysArray = []
     
     const weekDays = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo"]
@@ -66,6 +71,24 @@ export default function StaffSchedule(props) {
         getLeapYear()
         getActualMonthDays()
     }
+    
+
+    const getStaffData = async() =>{
+        if(userInSession){
+            const res = await fetch(`${API}/staffSchedule`,{
+                'Authorization':`JSW ${localStorage.getItem("token")}`
+            })
+            const data = await res.json();
+            if(data != null){
+                setStaffData(JSON.parse(data))
+            }
+        }
+    }
+
+    useEffect(() => {
+        setUserInSession(VerifyUser())
+        getStaffData()
+    }, [])
 
 
     useEffect(() => {
@@ -74,21 +97,6 @@ export default function StaffSchedule(props) {
 
     return (
         <div className="shulde">
-            {/* <div className="row">
-                {weekDays.map(day =>(
-                    <div className="col">{day}</div>
-                ))}
-                <div className="row justify-content-start  ">
-                    {
-                        totalDaysArray.map(day=>(
-                            <div className="col">  
-                                <ScheduleDailyCard />
-                            </div>
-                        ))
-                    }
-                </div>
-            </div> */}
-
             <div className="bg-calenadar" >
                 <div className className="days">
                 {weekDays.map(day => (
@@ -102,7 +110,7 @@ export default function StaffSchedule(props) {
                 <div className="days">
                     {totalDaysArray.map(day =>(
                         <div className="">
-                            <ScheduleDailyCard/>
+                            <ScheduleDailyCard  props={staffData}/>
                         </div>
                     ))}
                 </div>
@@ -110,3 +118,4 @@ export default function StaffSchedule(props) {
         </div>
     )
 }
+

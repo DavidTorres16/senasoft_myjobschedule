@@ -2,8 +2,27 @@ import './Style.css'
 import React, {useEffect,useState} from 'react'
 import { DangerActionButton } from '../ActionButton/ActionButton'
 import { NormalActionButton } from '../ActionButton/ActionButton'
+const API = process.env.REACT_APP_API;
 
 export default function StaffTable() {
+
+    const [staffData,setStaffData] = useState([])
+    const [state, setState] = useState(false)
+
+    const getStaffData = async() =>{
+        const res = await fetch(`${API}/staffCards`,{
+            'Authorization':`JSW ${localStorage.getItem("token")}`
+        })
+        const data = await res.json();
+        if(data != null){
+            setStaffData(JSON.parse(data))
+        }
+    }
+
+    useEffect(() => {
+        setStaffData(getStaffData())
+    }, [])
+
     return (
         <div className="d-flex flex-column bg-containerApp justify-content-center align-items-center">
             <table className="table bg-table-app tableDashboard align-middle">
@@ -13,23 +32,17 @@ export default function StaffTable() {
                     <th>Operaciones</th>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>texto Ejemplo</td>
-                        <td>texto Ejemplo</td>
-                        <td className="column-grid">
-                                <NormalActionButton/>
-                                <DangerActionButton/>
-                        </td>
-
-                        {/* <td className="row justify-content-center align-items-center w-100 marginNone">
-                            <div className="col-md-5 py-1  w-75 " >
-                                <NormalActionButton/>
-                            </div>
-                            <div className="col-md-5 py-1 w-75">
-                                <DangerActionButton/>
-                            </div>
-                        </td> */}
-                    </tr>
+                    {
+                        staffData.map(data =>(
+                        <tr>
+                            <td ><input type="text" value={data[0]}/></td>
+                            <td ><input type="text" value={data[1]}/></td>
+                            <td className="column-grid">
+                                    <button  className="btn btn-info w-100" onClick={e => setState(true)}>Editar</button>
+                                    <button className="btn btn-danger w-100">Eliminar</button>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>

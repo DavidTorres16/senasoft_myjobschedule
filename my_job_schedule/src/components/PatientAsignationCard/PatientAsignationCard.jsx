@@ -69,7 +69,7 @@ export function PatientAsignationCardVent(props) {
     }, [])
     
     return (
-        <div className="col-md-6 m-1 w-75">
+        <div className="col-md-6 m-1 w-75 m-auto">
             <form className={classname}>
                 <h2 className="formTitle">{name}</h2>
                 <div className="mb-3 d-flex flex-column w-75">
