@@ -206,7 +206,8 @@ def cronograma():
     
     data=cur.execute(f"select  shiftid,staffid,patientsgroup ,day ,turn  from workshift where staffid='{idenfermera}' ")
     
-    #envio el cronograma
+    #envio el cronograma a enviar
+
     cronograma=cur.fetchall()
     return jsonify({"shiftid":cronograma[0],
                     "staffid":cronograma[1],
