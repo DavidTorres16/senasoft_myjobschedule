@@ -1,11 +1,12 @@
 from flask import Flask, json ,request ,jsonify
 from flask_mysqldb import MySQL
-from routes.auth import routes_auth
+
 from dotenv import load_dotenv
 from flask_cors import CORS
 from funtion_jwt import write_token,valida_token
 from os import getenv
-
+from datetime import datetime
+from funtion_day import lastday
 # Importamos librerias 
 
 app = Flask(__name__)
@@ -24,7 +25,6 @@ mysql = MySQL(app)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 
-app.register_blueprint(routes_auth,url_prefix="/api")
 
 #Registro del personal de enfermeras
 @app.route('/staffRegistry',methods=["POST"])
@@ -120,13 +120,23 @@ def patientRegistry():
         cur.execute(" INSERT INTO patientsgroup (`groupquantity`, `patientype`,servicehours )  VALUES(%s,%s,%s)",(groupquantity,patientype,serviceHours))
         mysql.connection.commit()
         cur.close()
+       
+
+        cur.execute(f"select *  from staff  where specialities='{patientype}' and id NOT IN  (select staffid from workshift  );")
+        enfermera=cur.fetchone()
+
+
+
+
         return jsonify({"Message":"Pacientes Registrados"})
-
-
     except : 
         return jsonify({"Message":"Faltan datos"})
 
     cur.execute(f"SELECT * FROM patientsgroup WHERE gropuquantity = '{gropuquantity}' ")
+
+      
+
+        
     if data.fetchall()>1:
         mysql.connection.commit()
         cur.execute(f"SELECT * FROM staff WHERE specialities= '{patientype}'")
@@ -141,7 +151,7 @@ def staffSchedule():
 
 
     data=request.json
-    print(data)
+    
     #se debe crear el número de pacientes a atender 
     try:
         token=request.headers["Authorization"].split(' ')[1]
@@ -154,7 +164,8 @@ def staffSchedule():
         cur.execute(f" select *  from staff  where id NOT IN  (select staffid from workshift )")
     #   cur.execute(f" select *  from staff  where specialities={patientype} and id NOT IN  (select staffid from workshift  )")
         mysql.connection.commit()
-        data =cur.fetchall()
+        
+
 
         return jsonify(data)
 
@@ -163,6 +174,9 @@ def staffSchedule():
 
     except : 
         return jsonify({"Message":"Faltan datos"})
+
+
+
 
 @app.route('/indexPage',methods=["POST",'GET'])
 def retorno():
@@ -179,10 +193,26 @@ def retorno():
     return jsonify(data)
 
 
-
+@app.route('/prueba')
 def cronograma():
+    
+    year=datetime.now().year
+    mes=datetime.now().month
+    day=lastday(year,mes)
+    cur = mysql.connection.cursor()
+    mysql.connection.commit()
+    cur.execute(f"select *  from staff  where specialities='{3}' and id NOT IN  (select staffid from workshift  )")
+    
+    enfermera=cur.fetchone()
+    for i in range(datetime.now().day,day):
 
-    pass
+        cur.execute(f"INSERT INTO `bwuzxlyofwi6xbiurafd`.`workshift` (`staffid`, `shiftDay`, `starttime`, `finishtime`, `patientsgroup`, `day`) VALUES ('{enfermera[0]}', '{0}', '{0}', '{0}', '{1}', '{i}')")
+        mysql.connection.commit()
+       
+    # Ya se cuenta con la enfermera 
+    return jsonify({"Message":"Se registro "})
+
+    
 
 if __name__ == '__main__':
     load_dotenv()
