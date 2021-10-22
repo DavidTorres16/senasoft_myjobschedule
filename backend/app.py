@@ -4,7 +4,6 @@ from routes.auth import routes_auth
 from dotenv import load_dotenv
 from flask_cors import CORS
 from funtion_jwt import write_token,valida_token
-from funtion_mail import sendMail
 from os import getenv
 
 # Importamos librerias 
@@ -169,9 +168,13 @@ def cronograma():
 @app.route('/indexPage',methods=["POST",'GET'])
 def retorno():
     token=request.headers["Authorization"].split(' ')[1]
-    return jsonify(valida_token(token,output=True))
-
-
+    data= (valida_token(token,output=True))
+    id= data["id"]
+    cur = mysql.connection.cursor()
+    cur.execute(f" select id,name,lastname,specialities,password  from  staff where  id = '{id}'  " )
+    mysql.connection.commit()
+    data =cur.fetchone()
+    return jsonify(data)
 
 
 if __name__ == '__main__':
