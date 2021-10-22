@@ -1,8 +1,11 @@
 .bgButton{
-    background-color: #273c75b6;
+    /* background-color: #273c75b6; */
+    background-color: #dd1f1fd7;
     padding: 2.5em 0 2.5em 0;
     border-radius: 0.8em;
     margin: 10px;
+    width: 100%;
+   
 }
 
 .bgButton a{
@@ -10,8 +13,9 @@
     font-size: 3em;
     font-weight: bold;
     text-decoration: none;
+    text-decoration: none;
+    margin: 2rem 0 2rem 0;
 }
-
 
 .bgButton:hover{
     background-color: #197d9bb6;

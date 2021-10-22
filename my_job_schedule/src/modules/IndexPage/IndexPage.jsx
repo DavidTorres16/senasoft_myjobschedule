@@ -1,10 +1,9 @@
 import'./Style.css'
 import React, {useState,useEffect} from 'react'
+import { Redirect, useHistory } from 'react-router-dom'
 import verifyUser from '../../components/functions/verifyUser'
-import {PatientAsignationCardVent} from '../../components/PatientAsignationCard/PatientAsignationCard'
 import LinkAsButtonCard from '../../components/LinkAsButtonCard/LinkAsButtonCard'
-import { DangerActionButton } from '../../components/ActionButton/ActionButton'
-import { NormalActionButton } from '../../components/ActionButton/ActionButton'
+import Logout from '../../components/functions/Logout'
 
 const API = process.env.REACT_APP_API;
 
@@ -12,7 +11,7 @@ export default function IndexPage() {
 
     const [userInSession, setUserInSession] = useState(false)
     const [userData, setUserData] = useState({})
-    const [reloadReact, setReloadReact] = useState(false)
+    const [staffData, setStaffData] = useState({})
     
     const authorizeUser = () =>{
         let rawUserData = localStorage.getItem("token")
@@ -34,13 +33,10 @@ export default function IndexPage() {
                 }
             })
             const data = await res.json();
-            console.log("kkkkkkk", data)
             if(data != null){
-                console.log(33333, data)
                 setUserData(JSON.parse(data))
             }
         }
-        alert(userData[0])
     }
 
     
@@ -51,13 +47,36 @@ export default function IndexPage() {
 
 
     return (
-        <div className="container d-flex justify-content-center align-items-center w-100 h-100">
-            <div className="column-grid">
-                <LinkAsButtonCard name="Ingresar datos" url="/" />
-                <LinkAsButtonCard name="Ver calendario" url="/Calendar" />
-                <LinkAsButtonCard name="Crear horario" url="/" />
-                <LinkAsButtonCard name="Modificar personal" url="/modifyStaff" />
-                <DangerActionButton/>
+        <div  className="d-flex flex-column justify-content-center align-items-center w-100">
+            <div className="d-flex justify-content-center align-items-center">
+                <div className="d-flex justify-content-center align-items-center">
+                    <h1 className="text-light fw-bold">My Job Schedule</h1>
+                </div>
+                <section className="d-flex justify-content-center align-items-center mb-3 mt-3 w-100">
+                    <div className="col-4 justify-content-end align-items-end">
+                        <button className="btn btn-danger" onClick={Logout}>Cerrar sesión</button>
+                    </div>
+                </section>
+            </div>
+            <div className="container row mb-1">
+                <div className="row">
+                    <div className="col-md-6 mt-1">
+                        <LinkAsButtonCard name="Ingresar datos" url="/insertData" />
+                    </div>
+                    <div className="col-md-6 mt-1">
+                        <LinkAsButtonCard name="Ver calendario" url="/Calendar" />
+                    </div>
+                </div>
+                </div>
+                <div className="container row mt-1">
+                <div className="row">
+                    <div className="col-md-6 mt-1">
+                        <LinkAsButtonCard name="Crear calendario" url="/Calendar" />
+                    </div>
+                    <div className="col-md-6 mt-1">
+                        <LinkAsButtonCard name="Modificar personal" url="/modifyStaff" />
+                    </div>
+                </div>
             </div>
         </div>
     )
