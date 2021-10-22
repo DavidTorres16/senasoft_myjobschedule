@@ -196,15 +196,24 @@ def cronograma():
     cur.execute(f"select *  from staff  where specialities='{3}' and id NOT IN  (select staffid from workshift  )")
     
     enfermera=cur.fetchone()
+    idenfermera=enfermera[0]
     for i in range(datetime.now().day,day):
 
         cur.execute(f"INSERT INTO `bwuzxlyofwi6xbiurafd`.`workshift` (`staffid`, `shiftDay`, `starttime`, `finishtime`, `patientsgroup`, `day`) VALUES ('{enfermera[0]}', '{0}', '{0}', '{0}', '{1}', '{i}')")
         mysql.connection.commit()
-       
-    # Ya se cuenta con la enfermera 
-    return jsonify({"Message":"Se registro "})
 
+    # Ya se cuenta con la enfermera
     
+    data=cur.execute(f"select  shiftid,staffid,patientsgroup ,day ,turn  from workshift where staffid='{idenfermera}' ")
+    
+    #envio el cronograma
+    cronograma=cur.fetchall()
+    return jsonify({"shiftid":cronograma[0],
+                    "staffid":cronograma[1],
+                    "patientsgroup":cronograma[2],
+                    "day":cronograma[3],
+                    "turn":cronograma[4]})
+
 
 if __name__ == '__main__':
     load_dotenv()
