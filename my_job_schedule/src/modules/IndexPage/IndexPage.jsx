@@ -3,6 +3,9 @@ import React, {useState,useEffect} from 'react'
 import verifyUser from '../../components/functions/verifyUser'
 import {PatientAsignationCardVent} from '../../components/PatientAsignationCard/PatientAsignationCard'
 import LinkAsButtonCard from '../../components/LinkAsButtonCard/LinkAsButtonCard'
+import { DangerActionButton } from '../../components/ActionButton/ActionButton'
+import { NormalActionButton } from '../../components/ActionButton/ActionButton'
+
 const API = process.env.REACT_APP_API;
 
 export default function IndexPage() {
@@ -50,7 +53,11 @@ export default function IndexPage() {
     return (
         <div className="container d-flex justify-content-center align-items-center w-100 h-100">
             <div className="column-grid">
-                <LinkAsButtonCard/>
+                <LinkAsButtonCard name="Algo por ahí" url="/" />
+                <LinkAsButtonCard name="Algo por ahí" url="/" />
+                <LinkAsButtonCard name="Algo por ahí" url="/" />
+                <LinkAsButtonCard name="Algo por ahí" url="/" />
+                <DangerActionButton/>
             </div>
         </div>
     )

@@ -1,4 +1,6 @@
-import React from 'react'
+import React, {useEffect,useState} from 'react'
+import { DangerActionButton } from '../ActionButton/ActionButton'
+import { NormalActionButton } from '../ActionButton/ActionButton'
 
 export default function StaffTable() {
     return (
@@ -10,7 +12,12 @@ export default function StaffTable() {
                     <tr>Operaciones</tr>
                 </thead>
                 <tbody>
-                    
+                    <td>texto Ejemplo</td>
+                    <td>texto Ejemplo</td>
+                    <td>
+                        <DangerActionButton/>
+                        <NormalActionButton/>
+                    </td>
                 </tbody>
             </table>
         </div>
