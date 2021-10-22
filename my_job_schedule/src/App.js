@@ -5,7 +5,7 @@ import Registry from './components/Registry/Registry';
 import PatientAsignationCardVent from './components/PatientAsignationCard/PatientAsignationCard';
 import Login from './components/Login/Login';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import StaffSchedule from './components/StaffSchedule/StaffSchedule';
+import SchedulePage from './modules/SchedulePage/SchedulePage';
 import VerifyUser from './components/functions/verifyUser';
 import ModifyStaff from './modules/ModifyStaff/ModifyStaff';
 import IngresarDatos from './modules/IngresarDatos/IngresarDatos';
@@ -40,12 +40,12 @@ function App() {
             <Switch>
                 <Route path="/IndexPage" component={IndexPage}/>
                 <Route path="/insertData" component={IngresarDatos}/>
-                <Route path="/calendar" component={StaffSchedule}/>
+                <Route path="/calendar" component={SchedulePage}/>
                 <Route path="/modifyStaff" component={ModifyStaff}/>
+                <Route path="/staffRegistry" component={Registry}/>
             </Switch>
             :
             <Switch>
-                <Route path="/staffRegistry" component={Registry}/>
                 <Route path="/" component={Login}/>
             </Switch>
             }

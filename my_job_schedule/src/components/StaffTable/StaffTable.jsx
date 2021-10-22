@@ -17,8 +17,8 @@ export default function StaffTable() {
                         <td>texto Ejemplo</td>
                         <td>texto Ejemplo</td>
                         <td className="column-grid">
-                                <NormalActionButton/>
-                                <DangerActionButton/>
+                                <button  className="btn btn-info w-100">Editar</button>
+                                <button className="btn btn-danger w-100">Eliminar</button>
                         </td>
 
                         {/* <td className="row justify-content-center align-items-center w-100 marginNone">

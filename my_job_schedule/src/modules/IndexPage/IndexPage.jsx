@@ -52,7 +52,7 @@ export default function IndexPage() {
                 <div className="column-grid">
                     <LinkAsButtonCard name="Ingresar datos" url="/" />
                     <LinkAsButtonCard name="Ver calendario" url="/Calendar" />
-                    <LinkAsButtonCard name="Crear horario" url="/" />
+                    <LinkAsButtonCard name="Crear horario" url="/insertData" />
                     <LinkAsButtonCard name="Modificar personal" url="/modifyStaff" />
                     <button className="btn btn-danger" onClick={Logout}>Cerrar sesión</button>
                 </div>

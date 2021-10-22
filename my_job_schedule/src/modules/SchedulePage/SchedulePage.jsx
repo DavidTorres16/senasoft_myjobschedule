@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from 'react'
 import StaffSchedule from '../../components/StaffSchedule/StaffSchedule'
 import VerifyUser from '../../components/functions/verifyUser'
-import { DangerActionButton } from '../../components/ActionButton/ActionButton';
+import { ReturnButton } from '../../components/ActionButton/ActionButton';
 const API = process.env.REACT_APP_API;
 
 export default function SchedulePage() {
@@ -16,7 +16,7 @@ export default function SchedulePage() {
             })
             const data = await res.json();
             if(data != null){
-                setUserData(JSON.parse(data))
+                setStaffData(JSON.parse(data))
             }
         }
     }
@@ -32,7 +32,7 @@ export default function SchedulePage() {
     return (
         <div>
             <div>
-                <DangerActionButton />
+                <ReturnButton url="/IndexPage"/>
             </div>
             <div>
                 <StaffSchedule/>
