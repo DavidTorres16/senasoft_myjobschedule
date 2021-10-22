@@ -1,4 +1,5 @@
 import'./Style.css'
+import Icono from '../../img/Icono.png'
 import React, {useState,useEffect} from 'react'
 import { Redirect, useHistory } from 'react-router-dom'
 import verifyUser from '../../components/functions/verifyUser'
@@ -51,6 +52,7 @@ export default function IndexPage() {
         <div  className="d-flex flex-column justify-content-center align-items-center w-100">
             <div className="d-flex justify-content-center align-items-center">
                 <div className="d-flex justify-content-center align-items-center">
+                    <img src={Icono} alt="LOGO" />
                     <h1 className="text-light fw-bold">My Job Schedule</h1>
                 </div>
                 <section className="d-flex justify-content-center align-items-center mb-3 mt-3 w-100">
@@ -62,7 +64,7 @@ export default function IndexPage() {
             <div className="container row mb-1">
                 <div className="row">
                     <div className="col-md-6 mt-1">
-                        <LinkAsButtonCard name="Ingresar datos" url="/" />
+                        <LinkAsButtonCard name="Ingresar datos" url="/insertData" />
                     </div>
                     <div className="col-md-6 mt-1">
                         <LinkAsButtonCard name="Ver calendario" url="/Calendar" />
