@@ -42,9 +42,12 @@ export default function Login() {
                 })
             })
             const token = await res.json();
-            if(token != null){
+            if(token.exist != false){
                 localStorage.setItem("token",token.token)
                 setVerifiedUser(true)
+            }
+            else{
+                alert("Ingrese unas credenciales válidas")
             }
         }
     }
