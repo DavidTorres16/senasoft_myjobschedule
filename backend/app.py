@@ -56,6 +56,61 @@ def staffRegistry():
     except:
         return (jsonify({"Message": "Faltan datos por ingresar"}))
 
+
+
+
+
+#Registro del personal de enfermeras
+@app.route('/staffDelete/<id>',methods=["POST"])
+def staffDelete(id):
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute(f"SELECT * FROM staff WHERE id='{id}'")
+        alreadyExist= cur.fetchone()
+        mysql.connection.commit()
+        cur.close()
+        if alreadyExist == None:
+            cur = mysql.connection.cursor()
+            cur.execute("DELETE FROM staff id='{id}' ")
+            mysql.connection.commit()
+            cur.close() 
+            return (jsonify({"Message":"Se eliminio Correctamente"}))
+    except:
+        return (jsonify({"Message": "Faltan datos por ingresar"}))
+
+#Registro del personal de enfermeras
+@app.route('/staffUpdate/<id>',methods=["POST","GET"])
+def staffUpdate(id):
+    try:
+        print(request.json)
+        data=request.json
+        id=data["id"]
+        name=data["name"]
+        lastname=data["lastname"]
+        phonenumber=data["phonenumber"]
+        specialities=data["specialities"]
+        staffrestricttions= 1
+        passwords=data["passwords"]
+        cur = mysql.connection.cursor()
+
+        cur.execute(f"UPDATE `bwuzxlyofwi6xbiurafd`.`staff` SET `name` = '{name}', `lastname` = '{lastname}', `phonenumber` = '{phonenumber}', `specialities` = '{specialities}', `staffrestrictions` = '{staffrestricttions}', `password` = '{passwords}' WHERE (`id` = '{id}');")
+        alreadyExist= cur.fetchone()
+        mysql.connection.commit()
+        cur.close()
+        if alreadyExist == None:
+            cur = mysql.connection.cursor()
+            cur.execute("DELETE FROM staff )",
+            (id,name,lastname,phonenumber,specialities,staffrestricttions,passwords))
+            mysql.connection.commit()
+            cur.close() 
+            return (jsonify(exist = False))
+        else:
+            return (jsonify(exist = True))
+    except:
+        return (jsonify({"Message": "Faltan datos por ingresar"}))
+
+
+
 #Inicio de Sesión
 @app.route('/login', methods=['POST'])
 def login():
@@ -72,17 +127,7 @@ def login():
     else:
         return jsonify(exist = False)
 
-@app.route('/verify')
-def verify():
-    token=request.headers["Authorization"].split(' ')[1]
-    return valida_token(token,output=True)
-
-@app.route('/verify')
-def verifyToken():
-    token=request.get_json()
-    return valida_token(token,output=True)
-
-
+# registrar turno
 @app.route('/registerWorkshift',methods=["POST"])
 def registerWorkshift():
     try:
@@ -120,8 +165,6 @@ def patientRegistry():
         cur.execute(" INSERT INTO patientsgroup (`groupquantity`, `patientype`,servicehours )  VALUES(%s,%s,%s)",(groupquantity,patientype,serviceHours))
         mysql.connection.commit()
         cur.close()
-       
-
         cur.execute(f"select *  from staff  where specialities='{patientype}' and id NOT IN  (select staffid from workshift  );")
         enfermera=cur.fetchone()
 
@@ -130,17 +173,13 @@ def patientRegistry():
         return jsonify({"Message":"Faltan datos"})
 
     cur.execute(f"SELECT * FROM patientsgroup WHERE gropuquantity = '{gropuquantity}' ")
-
-      
-
-        
+    
     if data.fetchall()>1:
         mysql.connection.commit()
         cur.execute(f"SELECT * FROM staff WHERE specialities= '{patientype}'")
     else:
         pass
     # buscar si hay enfermeras para ese tipo de paciente 
-
 
 @app.route('/staffSchedule',methods=["POST"])
 def staffSchedule():
@@ -193,18 +232,21 @@ def cronograma():
     day=lastday(year,mes)
     cur = mysql.connection.cursor()
     mysql.connection.commit()
+
     cur.execute(f"select *  from staff  where specialities='{3}' and id NOT IN  (select staffid from workshift  )")
     
+
     enfermera=cur.fetchone()
     idenfermera=enfermera[0]
     for i in range(datetime.now().day,day):
-
-        cur.execute(f"INSERT INTO `bwuzxlyofwi6xbiurafd`.`workshift` (`staffid`, `shiftDay`, `starttime`, `finishtime`, `patientsgroup`, `day`) VALUES ('{enfermera[0]}', '{0}', '{0}', '{0}', '{1}', '{i}')")
-        mysql.connection.commit()
+        if(i>0):
+            if(i%5!=0 and i %7==0):
+                cur.execute(f"INSERT INTO `bwuzxlyofwi6xbiurafd`.`workshift` (`staffid`, `shiftDay`, `starttime`, `finishtime`, `patientsgroup`, `day`) VALUES ('{enfermera[0]}', '{0}', '{datetime.now()}', '{0}', '{1}', '{i}')")
+                mysql.connection.commit()
 
     # Ya se cuenta con la enfermera
     
-    data=cur.execute(f"select  shiftid,staffid,patientsgroup ,day ,turn  from workshift where staffid='{idenfermera}' ")
+    data=cur.execute(f"select  shiftid,staffid,patientsgroup ,day   from workshift where staffid='{idenfermera}' ")
     
     #envio el cronograma a enviar 
 
