@@ -1,10 +1,8 @@
 from flask import Flask, json ,request ,jsonify
 from flask_mysqldb import MySQL
-from routes.auth import routes_auth
 from dotenv import load_dotenv
 from flask_cors import CORS
 from funtion_jwt import write_token,valida_token
-from funtion_mail import sendMail
 from os import getenv
 
 # Importamos librerias 
@@ -25,7 +23,6 @@ mysql = MySQL(app)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 
-app.register_blueprint(routes_auth,url_prefix="/api")
 
 #Registro del personal de enfermeras
 @app.route('/staffRegistry',methods=["POST"])
