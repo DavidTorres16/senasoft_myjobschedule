@@ -1,17 +1,17 @@
 import './Style.css'
 import React, {useEffect, useState} from 'react'
 import StaffTable from '../../components/StaffTable/StaffTable'
-import { DangerActionButton } from '../../components/ActionButton/ActionButton'
-import { NormalActionButton } from '../../components/ActionButton/ActionButton'
+import Logout from '../../components/functions/Logout'
+import { Link } from 'react-router-dom'
 
 export default function ModifyStaff() {
     return (
         <div>
             <div>
-                <NormalActionButton/>
+                <Link className="btn btn-info w-100" to="/staffRegistry">Nuevo registro</Link>
             </div>
             <div>    
-                <DangerActionButton/>
+                <button className="btn btn-danger w-100" onClick={Logout}>Cerrar sesión</button>
             </div>
             <div className="container w-100">
                 <StaffTable/>

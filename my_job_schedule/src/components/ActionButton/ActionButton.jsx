@@ -1,10 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-export function DangerActionButton(ActionName) {
+export function ReturnButton(url) {
     return (
-        <a className="btn btn-danger w-100">
-            {ActionName.name}
-        </a>
+        <Link className="btn btn-info w-100" to={url.url}>
+            Regresar
+        </Link>
     )
 }
 

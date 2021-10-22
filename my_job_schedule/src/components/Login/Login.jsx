@@ -84,7 +84,6 @@ export default function Login() {
                     className="btn btn-success p-3 fs-5 w-100" 
                     value="IniciarSesion"/>
                 </div>
-                <a href="#" className="fs-5 text-light pt-2 pb-2 linkPassword">Olvidaste la contraseña?</a>
             </form>
             :
             <div>
