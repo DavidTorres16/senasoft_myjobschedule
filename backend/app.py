@@ -152,6 +152,26 @@ def registerWorkshift():
             return jsonify(exist = True)
     except :
         return jsonify({"Message":"Datos Faltantes"})
+
+
+
+
+# registrar turno
+@app.route('/staffCards',methods=["POST"])
+def staffCards():
+    try:
+        
+        cur = mysql.connection.cursor()
+        cur.execute("select *  from staff")
+        data=cur.fetchall()
+        mysql.connection.commit()
+        cur.close()
+        return jsonify(data)
+
+    except :
+        return jsonify({"Message":"Datos Faltantes"})
+
+        
 #Se crea el paciente
 @app.route('/patientRegistry', methods=["POST"])
 def patientRegistry():
