@@ -125,9 +125,6 @@ def patientRegistry():
         cur.execute(f"select *  from staff  where specialities='{patientype}' and id NOT IN  (select staffid from workshift  );")
         enfermera=cur.fetchone()
 
-
-
-
         return jsonify({"Message":"Pacientes Registrados"})
     except : 
         return jsonify({"Message":"Faltan datos"})
@@ -148,8 +145,6 @@ def patientRegistry():
 @app.route('/staffSchedule',methods=["POST"])
 def staffSchedule():
     # token
-
-
     data=request.json
     
     #se debe crear el número de pacientes a atender 
@@ -164,9 +159,6 @@ def staffSchedule():
         cur.execute(f" select *  from staff  where id NOT IN  (select staffid from workshift )")
     #   cur.execute(f" select *  from staff  where specialities={patientype} and id NOT IN  (select staffid from workshift  )")
         mysql.connection.commit()
-        
-
-
         return jsonify(data)
 
         #se debe crear el número de pacientes a atender 
