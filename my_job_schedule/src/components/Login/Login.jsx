@@ -88,7 +88,7 @@ export default function Login() {
             </form>
             :
             <div>
-                <Redirect to="prueba"/>
+                <Redirect to="/IndexPage"/>
             </div>
             }
         </div>

@@ -1,10 +1,10 @@
 import'./Style.css'
 import React, {useState,useEffect} from 'react'
+import { Redirect, useHistory } from 'react-router-dom'
 import verifyUser from '../../components/functions/verifyUser'
 import {PatientAsignationCardVent} from '../../components/PatientAsignationCard/PatientAsignationCard'
 import LinkAsButtonCard from '../../components/LinkAsButtonCard/LinkAsButtonCard'
-import { DangerActionButton } from '../../components/ActionButton/ActionButton'
-import { NormalActionButton } from '../../components/ActionButton/ActionButton'
+import Logout from '../../components/functions/Logout'
 
 const API = process.env.REACT_APP_API;
 
@@ -34,13 +34,10 @@ export default function IndexPage() {
                 }
             })
             const data = await res.json();
-            console.log("kkkkkkk", data)
             if(data != null){
-                console.log(33333, data)
                 setUserData(JSON.parse(data))
             }
         }
-        alert(userData[0])
     }
 
     
@@ -52,13 +49,13 @@ export default function IndexPage() {
 
     return (
         <div className="container d-flex justify-content-center align-items-center w-100 h-100">
-            <div className="column-grid">
-                <LinkAsButtonCard name="Ingresar datos" url="/" />
-                <LinkAsButtonCard name="Ver calendario" url="/Calendar" />
-                <LinkAsButtonCard name="Crear horario" url="/" />
-                <LinkAsButtonCard name="Modificar personal" url="/modifyStaff" />
-                <DangerActionButton/>
-            </div>
+                <div className="column-grid">
+                    <LinkAsButtonCard name="Ingresar datos" url="/" />
+                    <LinkAsButtonCard name="Ver calendario" url="/Calendar" />
+                    <LinkAsButtonCard name="Crear horario" url="/" />
+                    <LinkAsButtonCard name="Modificar personal" url="/modifyStaff" />
+                    <button className="btn btn-danger" onClick={Logout}>Cerrar sesión</button>
+                </div>
         </div>
     )
 }

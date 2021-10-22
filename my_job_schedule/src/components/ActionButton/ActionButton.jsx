@@ -3,7 +3,7 @@ import React from 'react'
 export function DangerActionButton(ActionName) {
     return (
         <a className="btn btn-danger w-100">
-            Eliminar
+            {ActionName.name}
         </a>
     )
 }

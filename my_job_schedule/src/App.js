@@ -15,25 +15,40 @@ function App() {
 
   const [userInSession, setUserInSession] = useState(false)
 
+  setInterval(() => {
+    if(VerifyUser()){
+      setUserInSession(true)
+    }else{
+      setUserInSession(false)
+    }
+  },1000);
+
 
   useEffect(() => {
     if(VerifyUser()){
       setUserInSession(true)
     }
-  }, [])
+  },[])
 
   return (
     <div className="container App">
       <Router>
         <div className="d-flex justify-content-center align-items-center w-100 h-100">
+          {
+            userInSession
+            ?
             <Switch>
-                <Route path="/staffRegistry" component={Registry}/>
-                <Route path="/prueba" component={IndexPage}/>
+                <Route path="/IndexPage" component={IndexPage}/>
                 <Route path="/insertData" component={IngresarDatos}/>
                 <Route path="/calendar" component={StaffSchedule}/>
                 <Route path="/modifyStaff" component={ModifyStaff}/>
+            </Switch>
+            :
+            <Switch>
+                <Route path="/staffRegistry" component={Registry}/>
                 <Route path="/" component={Login}/>
             </Switch>
+            }
         </div>
       </Router>
     </div>

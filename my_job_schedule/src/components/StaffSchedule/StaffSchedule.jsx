@@ -74,21 +74,6 @@ export default function StaffSchedule(props) {
 
     return (
         <div className="shulde">
-            {/* <div className="row">
-                {weekDays.map(day =>(
-                    <div className="col">{day}</div>
-                ))}
-                <div className="row justify-content-start  ">
-                    {
-                        totalDaysArray.map(day=>(
-                            <div className="col">  
-                                <ScheduleDailyCard />
-                            </div>
-                        ))
-                    }
-                </div>
-            </div> */}
-
             <div className="bg-calenadar" >
                 <div className className="days">
                 {weekDays.map(day => (
