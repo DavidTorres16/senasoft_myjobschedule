@@ -4,6 +4,7 @@ import Registry from './components/Registry/Registry';
 import PatientAsignationCardVent from './components/PatientAsignationCard/PatientAsignationCard';
 import Login from './components/Login/Login';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import StaffSchedule from './components/StaffSchedule/StaffSchedule';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
             <Switch>
                 <Route path="/staffRegistry" component={Registry}/>
                 <Route path="/prueba" component={IndexPage}/>
+                <Route path="/calendario" component={StaffSchedule}/>
                 <Route path="/" component={Login}/>
             </Switch>
         </div>

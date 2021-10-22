@@ -74,7 +74,7 @@ export default function StaffSchedule(props) {
     }, [])
 
     return (
-        <div className="">
+        <div className="shulde">
             {/* <div className="row">
                 {weekDays.map(day =>(
                     <div className="col">{day}</div>
@@ -90,11 +90,13 @@ export default function StaffSchedule(props) {
                 </div>
             </div> */}
 
-            <div className="" >
+            <div className="bg-calenadar" >
                 <div className className="days">
                 {weekDays.map(day => (
                     <div className="">
-                        {day}
+                        <p className="">
+                            {day}
+                        </p>
                     </div>
                 ))}
                 </div>
