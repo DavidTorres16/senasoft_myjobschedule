@@ -36,7 +36,7 @@ export default function StaffTable() {
                         staffData.map(data =>(
                         <tr>
                             <td ><input type="text" value={data[0]}/></td>
-                            <td ><input type="text" value={data[1]}/></td>
+                            <td ><input type="text" value={data[0]}/></td>
                             <td className="column-grid">
                                     <button  className="btn btn-info w-100" onClick={e => setState(true)}>Editar</button>
                                     <button className="btn btn-danger w-100">Eliminar</button>
