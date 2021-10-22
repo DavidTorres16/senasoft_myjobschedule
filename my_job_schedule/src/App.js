@@ -30,7 +30,7 @@ function App() {
                 <Route path="/staffRegistry" component={Registry}/>
                 <Route path="/prueba" component={IndexPage}/>
                 <Route path="/insertData" component={IngresarDatos}/>
-                <Route path="/calendario" component={StaffSchedule}/>
+                <Route path="/calendar" component={StaffSchedule}/>
                 <Route path="/modifyStaff" component={ModifyStaff}/>
                 <Route path="/" component={Login}/>
             </Switch>

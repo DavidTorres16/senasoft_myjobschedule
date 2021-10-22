@@ -2,17 +2,17 @@ import React from 'react'
 
 export function DangerActionButton(ActionName) {
     return (
-        <div>
-            <h3>bóton peligro</h3>
-        </div>
+        <a className="btn btn-danger w-100">
+            Eliminar
+        </a>
     )
 }
 
 export function NormalActionButton(ActionName){
     return(
-        <div>
-            <h3>botón Normal</h3>
-        </div>
+        <a className="btn btn-info w-100">
+            Editar
+        </a>
     )
 }
 
