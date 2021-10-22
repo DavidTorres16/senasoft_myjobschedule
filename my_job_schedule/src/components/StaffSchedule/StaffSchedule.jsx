@@ -1,6 +1,6 @@
 import './Style.css'
 import React, {useState, useEffect} from 'react'
-import ScheduleDailyCard from '../ScheduleDailyCard/scheduleDailyCard'
+import ScheduleCard from '../ScheduleCard/ScheduleCard'
 import VerifyUser from '../functions/verifyUser';
 const API= process.env.REACT_APP_API;
 
@@ -110,7 +110,7 @@ export default function StaffSchedule(props) {
                 <div className="days">
                     {totalDaysArray.map(day =>(
                         <div className="">
-                            <ScheduleDailyCard  props={staffData}/>
+                            <ScheduleCard  props={staffData}/>
                         </div>
                     ))}
                 </div>
