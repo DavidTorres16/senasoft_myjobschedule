@@ -3,10 +3,12 @@ import React, {useEffect, useState} from 'react'
 import StaffTable from '../../components/StaffTable/StaffTable'
 import Logout from '../../components/functions/Logout'
 import { Link } from 'react-router-dom'
+import { ReturnButton } from '../../components/ActionButton/ActionButton'
 
 export default function ModifyStaff() {
     return (
         <div>
+            <ReturnButton url="IndexPage"/>
             <div>
                 <Link className="btn btn-info w-100" to="/staffRegistry">Nuevo registro</Link>
             </div>
