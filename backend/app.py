@@ -232,6 +232,12 @@ def staffSchedule():
                     "day":cronograma[3],
                     "turn":cronograma[4]})
 
+@app.route('/staffCards',methods=["GET"])
+def staffSchedule():
+    cur = mysql.connection.cursor()
+    cur.execute
+
+
 
 if __name__ == '__main__':
     load_dotenv()

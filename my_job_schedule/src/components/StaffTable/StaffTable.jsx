@@ -14,6 +14,7 @@ export default function StaffTable() {
             'Authorization':`JSW ${localStorage.getItem("token")}`
         })
         const data = await res.json();
+        console.log("-------------")
         if(data != null){
             setStaffData(JSON.parse(data))
         }
@@ -33,10 +34,10 @@ export default function StaffTable() {
                 </thead>
                 <tbody>
                     {
-                        staffData.map(data =>(
+                        // staffData.map(data =>(
                         <tr>
-                            <td ><input type="text" value={data[0]}/></td>
-                            <td ><input type="text" value={data[0]}/></td>
+                            <td ><input type="text" />Texto prueba</td>
+                            <td ><input type="text" />Texto prueba</td>
                             <td className="column-grid">
                                     <button  className="btn btn-info w-100" onClick={e => setState(true)}>Editar</button>
                                     <button className="btn btn-danger w-100">Eliminar</button>

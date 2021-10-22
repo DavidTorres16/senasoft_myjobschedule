@@ -73,17 +73,17 @@ export default function StaffSchedule(props) {
     }
     
 
-    const getStaffData = async() =>{
-        if(userInSession){
-            const res = await fetch(`${API}/staffSchedule`,{
-                'Authorization':`JSW ${localStorage.getItem("token")}`
-            })
-            const data = await res.json();
-            if(data != null){
-                setStaffData(JSON.parse(data))
-            }
-        }
-    }
+    // const getStaffData = async() =>{
+    //     if(userInSession){
+    //         const res = await fetch(`${API}/staffSchedule`,{
+    //             'Authorization':`JSW ${localStorage.getItem("token")}`
+    //         })
+    //         const data = await res.json();
+    //         if(data != null){
+    //             setStaffData(JSON.parse(data))
+    //         }
+    //     }
+    // }
 
     useEffect(() => {
         setUserInSession(VerifyUser())
@@ -91,9 +91,9 @@ export default function StaffSchedule(props) {
     }, [])
 
 
-    useEffect(() => {
-        getSchedule()
-    }, [])
+    // useEffect(() => {
+    //     getSchedule()
+    // }, [])
 
     return (
         <div className="shulde">
