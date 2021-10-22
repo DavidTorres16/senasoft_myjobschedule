@@ -3,7 +3,6 @@ import Icono from '../../img/Icono.png'
 import React, {useState,useEffect} from 'react'
 import { Redirect, useHistory } from 'react-router-dom'
 import verifyUser from '../../components/functions/verifyUser'
-import {PatientAsignationCardVent} from '../../components/PatientAsignationCard/PatientAsignationCard'
 import LinkAsButtonCard from '../../components/LinkAsButtonCard/LinkAsButtonCard'
 import Logout from '../../components/functions/Logout'
 
@@ -13,7 +12,7 @@ export default function IndexPage() {
 
     const [userInSession, setUserInSession] = useState(false)
     const [userData, setUserData] = useState({})
-    const [reloadReact, setReloadReact] = useState(false)
+    const [staffData, setStaffData] = useState({})
     
     const authorizeUser = () =>{
         let rawUserData = localStorage.getItem("token")
@@ -74,7 +73,7 @@ export default function IndexPage() {
                 <div className="container row mt-1">
                 <div className="row">
                     <div className="col-md-6 mt-1">
-                        <LinkAsButtonCard name="Crear horario" url="/" />
+                        <LinkAsButtonCard name="Crear calendario" url="/Calendar" />
                     </div>
                     <div className="col-md-6 mt-1">
                         <LinkAsButtonCard name="Modificar personal" url="/modifyStaff" />
