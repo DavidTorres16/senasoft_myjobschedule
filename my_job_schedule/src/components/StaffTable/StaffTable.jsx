@@ -33,8 +33,7 @@ export default function StaffTable() {
                     <th>Operaciones</th>
                 </thead>
                 <tbody>
-                    {
-                        // staffData.map(data =>(
+                    {/* { */}
                         <tr>
                             <td ><input type="text" />Texto prueba</td>
                             <td ><input type="text" />Texto prueba</td>
@@ -43,7 +42,6 @@ export default function StaffTable() {
                                     <button className="btn btn-danger w-100">Eliminar</button>
                             </td>
                         </tr>
-                    ))}
                 </tbody>
             </table>
         </div>

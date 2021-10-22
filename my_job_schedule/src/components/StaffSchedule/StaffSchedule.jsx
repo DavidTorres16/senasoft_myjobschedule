@@ -87,7 +87,7 @@ export default function StaffSchedule(props) {
 
     useEffect(() => {
         setUserInSession(VerifyUser())
-        getStaffData()
+        // getStaffData()
     }, [])
 
 

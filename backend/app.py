@@ -198,7 +198,7 @@ def retorno():
     return jsonify(data)
 
 
-@app.route('/staffSchedule',methods=["POST"])
+"""@app.route('/staffSchedule',methods=["POST"])
 def staffSchedule():
     data=request.json
     patientype=data["patientype"]
@@ -230,7 +230,7 @@ def staffSchedule():
                     "staffid":cronograma[1],
                     "patientsgroup":cronograma[2],
                     "day":cronograma[3],
-                    "turn":cronograma[4]})
+                    "turn":cronograma[4]})"""
 
 @app.route('/staffCards',methods=["GET"])
 def staffSchedule():
