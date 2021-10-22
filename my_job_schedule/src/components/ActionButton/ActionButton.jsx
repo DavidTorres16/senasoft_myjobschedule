@@ -2,21 +2,21 @@ import React from 'react'
 
 export function DangerActionButton(ActionName) {
     return (
-        <div>
-            <h1>Nombre de la acción a ejecutar con el botón {ActionName}</h1>
-        </div>
+        <a className="btn btn-danger w-100">
+            Eliminar
+        </a>
     )
 }
 
 export function NormalActionButton(ActionName){
     return(
-        <div>
-            <h1>Nombre la acción a ejecutar con el botón {ActionName}</h1>
-        </div>
+        <a className="btn btn-info w-100">
+            Editar
+        </a>
     )
 }
 
-export function ExportPdfButton(){
+export function DownloadPdfButton(){
     return(
         <div>
             <h1>Descargar PDF</h1>
@@ -24,7 +24,7 @@ export function ExportPdfButton(){
     )
 }
 
-export function ExportPdfButton(){
+export function DownloadExcelButton(){
     return(
         <div>
             <h1>Descargar Excel</h1>
@@ -35,7 +35,7 @@ export function ExportPdfButton(){
 export function ShowMoreButton(){
     return(
         <div>
-            <h1>Mostrar más</h1>
+            <button className="btn-viewmore">Mostrar más</button>
         </div>
     )
 }

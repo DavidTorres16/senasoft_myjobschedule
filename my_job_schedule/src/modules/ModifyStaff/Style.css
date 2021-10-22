@@ -1,0 +1,28 @@
+
+.bg-containerApp{
+    background-color: #273c75b6;
+    width: 100%;
+    padding: 1em 1em 1em 1em;
+    border-radius: 35px;
+}
+
+.bg-table-app{
+    background-color: #273c75c9;
+}
+
+.input:focus{
+    background-color: rgba(124, 12, 12, 0);
+    border-style: none;
+    border-bottom: 2px solid #fff;
+}
+
+.tableDashboard{
+    color: #fff;
+    width: 100%;
+    border-radius: 15px;
+
+}
+
+.marginNone{
+    margin: 0px;
+}
