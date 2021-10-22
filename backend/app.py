@@ -144,14 +144,15 @@ def staffSchedule():
     print(data)
     #se debe crear el número de pacientes a atender 
     try:
-        groupquantity=data["groupquantity"]
-        patientype=data["patientype"]
-        serviceHours=data["serviceHours"]
+        token=request.headers["Authorization"].split(' ')[1]
+        data= (valida_token(token,output=True))
+        id= data["id"]
         cur = mysql.connection.cursor()
         print ("falle")
-        cur.execute(" INSERT INTO patientsgroup (`groupquantity`, `patientype`,servicehours )  VALUES(%s,%s,%s)",(groupquantity,patientype,serviceHours))
+    #    cur.execute(" INSERT INTO patientsgroup (`groupquantity`, `patientype`,servicehours )  VALUES(%s,%s,%s)",(groupquantity,patientype,serviceHours))
         mysql.connection.commit()
-        cur.execute(f" select *  from staff  where specialities={patientype} and id NOT IN  (select staffid from workshift  )")
+        cur.execute(f" select *  from staff  where id NOT IN  (select staffid from workshift )")
+    #   cur.execute(f" select *  from staff  where specialities={patientype} and id NOT IN  (select staffid from workshift  )")
         mysql.connection.commit()
         data =cur.fetchall()
 
@@ -169,11 +170,19 @@ def retorno():
     data= (valida_token(token,output=True))
     id= data["id"]
     cur = mysql.connection.cursor()
-    cur.execute(f" select id,name,lastname,specialities,password  from  staff where  id = '{id}'  " )
+    cur.execute(f" select id,name,lastname,specialities,password  from  staff   " )
     mysql.connection.commit()
-    data =cur.fetchone()
+    data =cur.fetchall()
+    print(type(data))
+    for item in data:
+        print (item)
     return jsonify(data)
 
+
+
+def cronograma():
+
+    pass
 
 if __name__ == '__main__':
     load_dotenv()
