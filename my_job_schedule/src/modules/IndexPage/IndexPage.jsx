@@ -50,9 +50,9 @@ export default function IndexPage() {
     return (
         <div className="container d-flex justify-content-center align-items-center w-100 h-100">
                 <div className="column-grid">
-                    <LinkAsButtonCard name="Ingresar datos" url="/" />
+                    <LinkAsButtonCard name="Ingresar datos" url="/insertData" />
                     <LinkAsButtonCard name="Ver calendario" url="/Calendar" />
-                    <LinkAsButtonCard name="Crear horario" url="/insertData" />
+                    <LinkAsButtonCard name="Crear horario" url="/" />
                     <LinkAsButtonCard name="Modificar personal" url="/modifyStaff" />
                     <button className="btn btn-danger" onClick={Logout}>Cerrar sesión</button>
                 </div>
