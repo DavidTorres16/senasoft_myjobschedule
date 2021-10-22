@@ -2,7 +2,7 @@ import'./Style.css'
 import React, {useState,useEffect} from 'react'
 import verifyUser from '../../components/functions/verifyUser'
 import {PatientAsignationCardVent} from '../../components/PatientAsignationCard/PatientAsignationCard'
-import LinkAsButtonCard from '../../components/LinkAsButtonCardComponent'
+import LinkAsButtonCard from '../../components/LinkAsButtonCard/LinkAsButtonCard'
 const API = process.env.REACT_APP_API;
 
 export default function IndexPage() {

@@ -151,9 +151,14 @@ def cronograma():
         cur.execute(" INSERT INTO patientsgroup (`groupquantity`, `patientype`,servicehours )  VALUES(%s,%s,%s)",(groupquantity,patientype,serviceHours))
         mysql.connection.commit()
         cur.close()
+
+        # se debe verificar primero que existen enfermeras y adicional de la categoria libres 
         return jsonify({"Message":"Pacientes Registrados"})
         #se debe crear el número de pacientes a atender 
         # creo la cantidad de  pacientes requeridos pacientes
+
+
+        
 
     except : 
         return jsonify({"Message":"Faltan datos"})
@@ -162,8 +167,9 @@ def cronograma():
 
 @app.route('/indexPage',methods=["POST",'GET'])
 def retorno():
-    token=request.headers["Authorization"]
-    return jsonify({"token_retornar":token})
+    token=request.headers["Authorization"].split(' ')[1]
+
+    return jsonify(valida_token(token,output=True))
 
 
 
