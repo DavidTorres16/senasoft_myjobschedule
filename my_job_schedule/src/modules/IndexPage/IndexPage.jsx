@@ -48,14 +48,56 @@ export default function IndexPage() {
 
 
     return (
-        <div className="container d-flex justify-content-center align-items-center w-100 h-100">
-                <div className="column-grid">
-                    <LinkAsButtonCard name="Ingresar datos" url="/" />
-                    <LinkAsButtonCard name="Ver calendario" url="/Calendar" />
-                    <LinkAsButtonCard name="Crear horario" url="/" />
-                    <LinkAsButtonCard name="Modificar personal" url="/modifyStaff" />
-                    <button className="btn btn-danger" onClick={Logout}>Cerrar sesión</button>
+        // <div className="container d-flex flex-column justify-content-center align-items-center w-100 h-100">
+        //             <div>
+        //                 <button className="btn btn-danger" onClick={Logout}>Cerrar sesión</button>
+        //             </div>
+        //             <div className="column-grid">
+        //                 <div>
+        //                     <LinkAsButtonCard name="Ingresar datos" url="/" />
+        //                 </div>
+        //                 <div>
+        //                     <LinkAsButtonCard name="Ver calendario" url="/Calendar" />
+        //                 </div>
+        //                 <div>
+        //                     <LinkAsButtonCard name="Crear horario" url="/" />
+        //                 </div>
+        //                 <div>
+        //                     <LinkAsButtonCard name="Modificar personal" url="/modifyStaff" />
+        //                 </div>
+        //             </div>
+        // </div>
+        <div  className="d-flex flex-column justify-content-center align-items-center w-100">
+            <div className="d-flex justify-content-center align-items-center">
+                <div className="d-flex justify-content-center align-items-center">
+                    <h1 className="text-light fw-bold">My Job Schedule</h1>
                 </div>
+                <section className="d-flex justify-content-center align-items-center mb-3 mt-3 w-100">
+                    <div className="col-4 justify-content-end align-items-end">
+                    <button className="btn btn-danger btn-logout">Cerrar Sesion</button>
+                    </div>
+                </section>
+            </div>
+            <div className="container row mb-1">
+                <div className="row">
+                    <div className="col-md-6 mt-1">
+                        <LinkAsButtonCard name="Ingresar datos" url="/" />
+                    </div>
+                    <div className="col-md-6 mt-1">
+                        <LinkAsButtonCard name="Ver calendario" url="/Calendar" />
+                    </div>
+                </div>
+                </div>
+                <div className="container row mt-1">
+                <div className="row">
+                    <div className="col-md-6 mt-1">
+                        <LinkAsButtonCard name="Crear horario" url="/" />
+                    </div>
+                    <div className="col-md-6 mt-1">
+                        <LinkAsButtonCard name="Modificar personal" url="/modifyStaff" />
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import './Style.css'
 import React, {useState, useEffect} from 'react'
-import ScheduleDailyCard from '../ScheduleDailyCard/scheduleDailyCard'
+import ScheduleDailyCard from '../ScheduleDailyCard/ScheduleDailyCard'
 export default function StaffSchedule(props) {
 
     const date = new Date()
