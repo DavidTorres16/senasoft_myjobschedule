@@ -3,7 +3,7 @@ import React from 'react'
 export function DangerActionButton(ActionName) {
     return (
         <div>
-            <h1>Nombre de la acción a ejecutar con el botón</h1>
+            <h3>bóton peligro</h3>
         </div>
     )
 }
@@ -11,7 +11,7 @@ export function DangerActionButton(ActionName) {
 export function NormalActionButton(ActionName){
     return(
         <div>
-            <h1>Nombre la acción a ejecutar con el botón</h1>
+            <h3>botón Normal</h3>
         </div>
     )
 }

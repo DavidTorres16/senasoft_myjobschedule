@@ -7,6 +7,8 @@ import Login from './components/Login/Login';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import StaffSchedule from './components/StaffSchedule/StaffSchedule';
 import VerifyUser from './components/functions/verifyUser';
+import ModifyStaff from './modules/ModifyStaff/ModifyStaff';
+import IngresarDatos from './modules/IngresarDatos/IngresarDatos';
 
 
 function App() {
@@ -27,7 +29,9 @@ function App() {
             <Switch>
                 <Route path="/staffRegistry" component={Registry}/>
                 <Route path="/prueba" component={IndexPage}/>
+                <Route path="/insertData" component={IngresarDatos}/>
                 <Route path="/calendario" component={StaffSchedule}/>
+                <Route path="/modifyStaff" component={ModifyStaff}/>
                 <Route path="/" component={Login}/>
             </Switch>
         </div>

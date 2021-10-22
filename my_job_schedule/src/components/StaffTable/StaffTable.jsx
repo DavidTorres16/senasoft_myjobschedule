@@ -7,17 +7,19 @@ export default function StaffTable() {
         <div>
             <table>
                 <thead>
-                    <tr>Nombre</tr>
-                    <tr>Especialidad</tr>
-                    <tr>Operaciones</tr>
+                    <th>Nombre</th>
+                    <th>Especialidad</th>
+                    <th>Operaciones</th>
                 </thead>
                 <tbody>
-                    <td>texto Ejemplo</td>
-                    <td>texto Ejemplo</td>
-                    <td>
-                        <DangerActionButton/>
-                        <NormalActionButton/>
-                    </td>
+                    <tr>
+                        <td>texto Ejemplo</td>
+                        <td>texto Ejemplo</td>
+                        <td>
+                            <DangerActionButton/>
+                            <NormalActionButton/>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
