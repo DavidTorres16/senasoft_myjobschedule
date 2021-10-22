@@ -1,0 +1,19 @@
+.bgButton{
+    background-color: #273c75b6;
+    padding: 2.5em 0 2.5em 0;
+    border-radius: 0.8em;
+    margin: 10px;
+}
+
+.bgButton a{
+    color: white;
+    font-size: 3em;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+
+.bgButton:hover{
+    background-color: #197d9bb6;
+    color: white;
+}

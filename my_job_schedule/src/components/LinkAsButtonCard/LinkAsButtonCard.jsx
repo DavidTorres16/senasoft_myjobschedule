@@ -5,7 +5,7 @@ export default function LinkAsButtonCard(props) {
     const propArray = Object.values(props);
     console.log(propArray)
     return (
-        <div>
+        <div className="bgButton">
             <Link>Hola</Link>
         </div>
     )
